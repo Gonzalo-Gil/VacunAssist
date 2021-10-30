@@ -6,6 +6,7 @@
 		<th> Fecha </th>
 		<th> Sede </th>
 		<th> Enfermedad </th>
+		<th> Estado</th>
 	</tr>
 
 	<% @turnos.each do |t| %>
@@ -13,6 +14,7 @@
 			<td> <%= t.fecha %> </td>
 			<td> <%= t.sede %> </td>
 			<td> <%= t.vacuna_id %> </td>
+			<td> <%= t.estado %> </td>
 		</tr>
 	<% end %>
 
