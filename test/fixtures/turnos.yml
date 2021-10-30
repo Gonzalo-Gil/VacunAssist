@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  fecha: 2021-10-28
-  sede: MyString
+  fecha: 2021-10-30
+  sede_id: 1
   vacuna_id: 1
   user_id: 1
 
 two:
-  fecha: 2021-10-28
-  sede: MyString
+  fecha: 2021-10-30
+  sede_id: 1
   vacuna_id: 1
   user_id: 1

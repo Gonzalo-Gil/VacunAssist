@@ -1,3 +1,4 @@
 class Vacuna < ApplicationRecord
-    has_many :turnos
+belongs_to :enfermedad
+
 end
