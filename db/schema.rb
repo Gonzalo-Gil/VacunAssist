@@ -10,11 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_28_224649) do
+ActiveRecord::Schema.define(version: 2021_10_30_183831) do
+
+  create_table "enfermedads", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "laboratorios", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sedes", force: :cascade do |t|
+    t.string "nombre"
+    t.integer "calle"
+    t.integer "numero"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "turnos", force: :cascade do |t|
     t.date "fecha"
-    t.string "sede"
+    t.integer "sede_id"
     t.integer "vacuna_id"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
@@ -39,9 +59,9 @@ ActiveRecord::Schema.define(version: 2021_10_28_224649) do
   end
 
   create_table "vacunas", force: :cascade do |t|
-    t.string "enfermedad"
+    t.integer "enfermedad_id"
     t.integer "cant_dosis"
-    t.string "laboratorio"
+    t.integer "laboratorio_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
