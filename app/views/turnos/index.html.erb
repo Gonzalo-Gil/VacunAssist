@@ -1,0 +1,23 @@
+<h1> Listado de turnos </h1>
+
+<table class="table">
+
+	<tr>
+		<th> Fecha </th>
+		<th> Sede </th>
+		<th> Enfermedad </th>
+	</tr>
+
+	<% @turnos.each do |t| %>
+		<tr>
+			<td> <%= t.fecha %> </td>
+			<td> <%= t.sede %> </td>
+			<td> <%= t.vacuna_id %> </td>
+		</tr>
+	<% end %>
+
+	<% if @turnos.size == 0 %>
+		<tr> <td colspan="3"> No tiene turnos en su historial. </td> </tr>
+	<% end %>
+
+</table>
