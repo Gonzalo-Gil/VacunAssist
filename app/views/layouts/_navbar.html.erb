@@ -1,13 +1,15 @@
 <header>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark navbar-custom">
-        <%= link_to "VACUNASSIST", root_path, class: 'navbar-brand' %>    
+        <%= link_to root_path, class: 'navbar-brand' do %> 
+            <%= image_tag "logo.PNG", title: "Logo", class: "logo", width: "60", heigth: "60", style: "margin-left: 10px" %>
+        <% end %>   
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse collapse" id="navbarNav">
             <% if user_signed_in? %>
                 <ul class="navbar-nav">                
-                   <span style="color: white" > Hola <%= current_user.nombre %> <%= current_user.apellido %></span>
+                   <span style="color: white" > ¡Hola, <%= current_user.nombre %> <%= current_user.apellido %>!</span>
                 </ul>
                 <ul class="navbar-nav">                
                     <%= link_to "Mis turnos", turnos_path, class: 'nav-link' %>
