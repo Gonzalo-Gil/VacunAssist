@@ -1,20 +1,33 @@
-<h2>Log in</h2>
+<div class="my-form">
+  <%= image_tag "logo4.PNG", title: "Logo", class: "logo", width: "120", heigth: "120" %>
+  <h1 style="margin-top: 10px">Iniciar sesión</h1>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-  <%= f.input :dni,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "dni" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-  </div>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-group">
+      <div class="input-field" style="text-align: left">
+        <%= f.label :dni %><br />
+        <%= f.number_field :dni, class: 'form-control', autocomplete: "dni" %>
+      </div>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <div class="input-field" style="text-align: left">
+        <%= f.label :contraseña %><br />
+        <%= f.password_field :password, class: 'form-control', autocomplete: "current-password" %>
+      </div>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <% if devise_mapping.rememberable? %>
+      <div class="field" style="margin-bottom: 10px">
+        <%= f.check_box :remember_me, class: 'my-checkbox' %>
+        <%= f.label :Recordarme, class: 'form-check-label', style:"font-size: 20px" %>
+      </div>
+    <% end %>
+
+    <div class="actions" style="margin-bottom: 10px">
+      <%= f.submit "Entrar", class: 'btn btn-primary btn-lg my-button' %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>

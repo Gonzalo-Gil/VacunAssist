@@ -29,3 +29,25 @@ a.links {
 a.links:hover {
     text-decoration: underline #0000EE;
 }
+
+.my-form{
+    text-align: center;
+    background-color: white;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.input-field{
+    font-size: 20px;
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+.my-checkbox{
+    width: 18px;
+    height: 18px;
+}
+.my-button{
+    width: 250px;
+}
