@@ -1,0 +1,23 @@
+<h1> Listado de turnos </h1>
+
+<table class="table">
+
+	<tr>
+		<th> Enfermedad </th>
+		<th> Cantidad de dosis </th>
+		<th> Laboratorio </th>
+	</tr>
+
+	<% @turnos.where(estado = "Aplicado")each do |t| %>
+		<tr>
+			<td> <%= v.enfermedad.nombre %> </td>
+			<td> <%= v.cant_dosis %> </td>
+			<td> <%= v.laboratorio.nombre %> </td>
+		</tr>
+	<% end %>
+
+	<% if @vacunas.size == 0 %>
+		<tr> <td colspan="3"> No tiene vacunas en su historial. </td> </tr>
+	<% end %>
+
+</table>
