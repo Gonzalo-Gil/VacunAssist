@@ -1,3 +1,3 @@
 class Laboratorio < ApplicationRecord
-belongs_to :vacuna
+has_many :vacuna
 end
