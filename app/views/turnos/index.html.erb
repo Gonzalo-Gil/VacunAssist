@@ -1,55 +1,75 @@
-<h1> Listado de turnos </h1>
+<div class="d-flex flex-column justify-content-center align-items-center" style= " padding-top: 20px;">		
+	<div class="card text-center mx-auto" style= "width: 90%; ">
+		<div class="card-header">
+			<ul class="nav nav-tabs card-header-tabs">
+				<li class="nav-item">
+				<a class="nav-link active" href="#">General</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Pendientes</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Cancelados</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Completados</a>
+			</li>
+			</ul>
+		</div>
+			<div class="card-body">
+				<h1 class="card-title">Turnos</h1>
+				<table class="table table-bordered">
 
-<table class="table">
+					<% if @turnos.size != 0 %>
+						<tr>
+							<th> Fecha </th>
+							<th> Sede </th>
+							<th> Enfermedad </th>
+							<th> Estado</th>
+							<th> Opciones</th>
+						</tr>
+					<% end %>
 
-<% if @turnos.size != 0 %>
-	<tr>
-		<th> Fecha </th>
-		<th> Sede </th>
-		<th> Enfermedad </th>
-		<th> Estado</th>
-	</tr>
-<% end %>
+		<% @turnos.each do |t| %>
+			<tr>
+				<td> <%= t.fecha %> </td>
+				<td> <%=t.sede.nombre.capitalize%></td> 
+				<td>  <%=t.vacuna.enfermedad.nombre.capitalize%> </td> 
+				<td> <%= t.estado %> </td> 
+				<td> <% if t.estado == 'pendiente' %>
+					<!-- Boton del modal -->
+					<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelarModal">
+					Cancelar turno
+					</button>
 
-
-	<% @turnos.each do |t| %>
-		<tr>
-			<td> <%= t.fecha %> </td>
-			<td> <%=t.sede.nombre.capitalize%></td> 
-			<td>  <%=t.vacuna.enfermedad.nombre.capitalize%> </td> 
-			<td> <%= t.estado %> </td> 
-			<td> <% if t.estado == 'pendiente' %>
-				<!-- Boton del modal -->
-				<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelarModal">
-				Cancelar turno
-				</button>
-
-				<!-- Modal -->
-				<div class="modal fade" id="cancelarModal" tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="cancelarModalLabel">Turno para el día <%= t.fecha %> </h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<!-- Modal -->
+					<div class="modal fade" id="cancelarModal" tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="cancelarModalLabel">Turno para el día <%= t.fecha %> </h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							¿Desea cancelar el turno para: <%=t.vacuna.enfermedad.nombre.capitalize%>?
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+							<%= link_to "Confirmar", t, method: :put, class: 'btn btn-danger btn-sm' %>
+						</div>
+						</div>
 					</div>
-					<div class="modal-body">
-						¿Desea cancelar el turno para: <%=t.vacuna.enfermedad.nombre.capitalize%>?
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-						<%= link_to "Confirmar", t, method: :put, class: 'btn btn-danger btn-sm' %>
-					</div>
-					</div>
-				</div>
-				</div>
-			<% end %>
-			</td>
-		</tr>
-	<% end %>
+				<% end %>
+				</td>
+			</tr>
+		<% end %>
 
-	<% if @turnos.size == 0 %>
-		<tr> <td colspan="3"> No dispone de turnos registrados en el sistema. </td> </tr>
-	<% end %>
+		<% if @turnos.size == 0 %>
+			<tr> <td colspan="3"> No dispone de turnos registrados en el sistema. </td> </tr>
+		<% end %>
 
-</table>
+				</table>
+	</div>
+</div>
 
