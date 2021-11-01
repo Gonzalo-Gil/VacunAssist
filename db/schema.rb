@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_30_200818) do
+ActiveRecord::Schema.define(version: 2021_10_31_142019) do
 
   create_table "enfermedads", force: :cascade do |t|
     t.string "nombre"
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 2021_10_30_200818) do
     t.integer "dni"
     t.date "fecha_nacimiento"
     t.integer "telefono"
+    t.boolean "notificacion"
+    t.string "medio_notificacion"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
