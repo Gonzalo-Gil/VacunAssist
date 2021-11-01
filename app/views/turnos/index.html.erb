@@ -16,8 +16,8 @@
 	<% @turnos.each do |t| %>
 		<tr>
 			<td> <%= t.fecha %> </td>
-			<td> sedeX  </td> 
-			<td>  enfermedadX</td> 
+			<td> <%=t.sede.nombre.capitalize%></td> 
+			<td>  <%=t.vacuna.enfermedad.nombre.capitalize%> </td> 
 			<td> <%= t.estado %> </td> 
 			<td> <% if t.estado == 'pendiente' %>
 				<%= link_to "Cancelar turno", t, method: :put, class: 'btn btn-danger btn-sm' %>

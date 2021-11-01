@@ -1,3 +1,3 @@
 class Sede < ApplicationRecord
-    belongs_to :turno
+    has_many :turno
 end
