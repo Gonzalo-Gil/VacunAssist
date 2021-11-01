@@ -19,57 +19,60 @@
 			<div class="card-body">
 				<h1 class="card-title">Turnos</h1>
 				<table class="table table-bordered">
-
 					<% if @turnos.size != 0 %>
 						<tr>
-							<th> Fecha </th>
-							<th> Sede </th>
 							<th> Enfermedad </th>
 							<th> Estado</th>
 							<th> Opciones</th>
 						</tr>
 					<% end %>
+			<% @turnos.each_with_index do |t,index| %>
+				<tr> 
+					<td>  <%=t.vacuna.enfermedad.nombre.capitalize%> </td> 
+					<td> <%= t.estado %> </td> 
+					<td> <% if t.estado == 'pendiente' %>
+						<!-- Boton del modal -->
+						<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelarModal">
+						Cancelar turno
+						</button>
 
-		<% @turnos.each do |t| %>
-			<tr>
-				<td> <%= t.fecha %> </td>
-				<td> <%=t.sede.nombre.capitalize%></td> 
-				<td>  <%=t.vacuna.enfermedad.nombre.capitalize%> </td> 
-				<td> <%= t.estado %> </td> 
-				<td> <% if t.estado == 'pendiente' %>
-					<!-- Boton del modal -->
-					<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelarModal">
-					Cancelar turno
-					</button>
-
-					<!-- Modal -->
-					<div class="modal fade" id="cancelarModal" tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered">
-						<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="cancelarModalLabel">Turno para el día <%= t.fecha %> </h5>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						<!-- Modal -->
+						<div class="modal fade" id="cancelarModal" tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="cancelarModalLabel">Turno para el día <%= t.fecha %> </h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								¿Desea cancelar el turno para: <%=t.vacuna.enfermedad.nombre.capitalize%>?
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+								<%= link_to "Confirmar", t, method: :put, class: 'btn btn-danger btn-sm' %>
+							</div>
+							</div>
 						</div>
-						<div class="modal-body">
-							¿Desea cancelar el turno para: <%=t.vacuna.enfermedad.nombre.capitalize%>?
 						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-							<%= link_to "Confirmar", t, method: :put, class: 'btn btn-danger btn-sm' %>
-						</div>
+					<% end %>
+					<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample<%= index.to_s %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+    					Ver detalle
+  					</a>
+					<div class="collapse" id="collapseExample<%= index.to_s %>">
+						<div class="card card-body">
+							<p>
+								Sede: <%= t.sede.nombre %>, calle: <%= t.sede.calle %> numero: <%= t.sede.numero %> <br>
+								Fecha: <%= t.fecha %>
+							</p>
 						</div>
 					</div>
-					</div>
-				<% end %>
-				</td>
-			</tr>
-		<% end %>
-
-		<% if @turnos.size == 0 %>
-			<tr> <td colspan="3"> No dispone de turnos registrados en el sistema. </td> </tr>
-		<% end %>
-
-				</table>
+					</td>
+				</tr>
+			<% end %>
+			<% if @turnos.size == 0 %>
+				<tr> <td colspan="3"> No dispone de turnos registrados en el sistema. </td> </tr>
+			<% end %>
+		</table>
 	</div>
 </div>
 
