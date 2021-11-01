@@ -8,7 +8,6 @@
 		<th> Sede </th>
 		<th> Enfermedad </th>
 		<th> Estado</th>
-		<th> Cancelar turno </th>
 	</tr>
 <% end %>
 
@@ -20,8 +19,30 @@
 			<td>  <%=t.vacuna.enfermedad.nombre.capitalize%> </td> 
 			<td> <%= t.estado %> </td> 
 			<td> <% if t.estado == 'pendiente' %>
-				<%= link_to "Cancelar turno", t, method: :put, class: 'btn btn-danger btn-sm' %>
-				<% end %> 
+				<!-- Boton del modal -->
+				<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelarModal">
+				Cancelar turno
+				</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="cancelarModal" tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="cancelarModalLabel">Turno para el día <%= t.fecha %> </h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						¿Desea cancelar el turno para: <%=t.vacuna.enfermedad.nombre.capitalize%>?
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+						<%= link_to "Confirmar", t, method: :put, class: 'btn btn-danger btn-sm' %>
+					</div>
+					</div>
+				</div>
+				</div>
+			<% end %>
 			</td>
 		</tr>
 	<% end %>
