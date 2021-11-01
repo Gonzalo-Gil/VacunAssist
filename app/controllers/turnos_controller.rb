@@ -7,8 +7,17 @@ class TurnosController < ApplicationController
   
     def show
     end
+
+    def update
+        @turno=Turno.find(params[:id])
+        if @turno.estado =="pendiente"
+            @turno.estado="cancelado"
+            @turno.save
+            redirect_to turnos_path, notice: "Se ha cancelado el turno"
+        end
+    end
   
-    def edit    
+    def edit
     end
     
     def destroy

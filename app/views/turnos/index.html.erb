@@ -2,24 +2,33 @@
 
 <table class="table">
 
+<% if @turnos.size != 0 %>
 	<tr>
 		<th> Fecha </th>
 		<th> Sede </th>
 		<th> Enfermedad </th>
 		<th> Estado</th>
+		<th> Cancelar turno </th>
 	</tr>
+<% end %>
+
 
 	<% @turnos.each do |t| %>
 		<tr>
 			<td> <%= t.fecha %> </td>
-			<td> <%= t.sede %> </td>
-			<td> <%= t.vacuna_id %> </td>
-			<td> <%= t.estado %> </td>
+			<td> sedeX  </td> 
+			<td>  enfermedadX</td> 
+			<td> <%= t.estado %> </td> 
+			<td> <% if t.estado == 'pendiente' %>
+				<%= link_to "Cancelar turno", t, method: :put, class: 'btn btn-danger btn-sm' %>
+				<% end %> 
+			</td>
 		</tr>
 	<% end %>
 
 	<% if @turnos.size == 0 %>
-		<tr> <td colspan="3"> No tiene turnos en su historial. </td> </tr>
+		<tr> <td colspan="3"> No dispone de turnos registrados en el sistema. </td> </tr>
 	<% end %>
 
 </table>
+
