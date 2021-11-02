@@ -55,17 +55,28 @@
 						</div>
 						</div>
 					<% end %>
-					<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample<%= index.to_s %>" role="button" aria-expanded="false" aria-controls="collapseExample">
-    					Ver detalle
-  					</a>
-					<div class="collapse" id="collapseExample<%= index.to_s %>">
-						<div class="card card-body">
-							<p>
-								Sede: <%= t.sede.nombre %>, calle: <%= t.sede.calle %> numero: <%= t.sede.numero %> <br>
-								Fecha: <%= t.fecha %>
-							</p>
+					<button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#detalleModal<%=index.to_s%>">
+						Ver detalle
+						</button>
+
+						<!-- Modal -->
+						<div class="modal fade" id="detalleModal<%=index.to_s%>" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="cancelarModalLabel">Turno para la vacuna contra <%= t.vacuna.enfermedad.nombre %> </h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								Fecha del turno: <%=t.fecha%> <br>
+								Sede del vacunatorio: <%= t.sede.nombre%>. Ubicado en calle: <%=t.sede.calle%> numero <%=t.sede.numero%>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Continuar</button>
+							</div>
+							</div>
 						</div>
-					</div>
+						</div>
 					</td>
 				</tr>
 			<% end %>
