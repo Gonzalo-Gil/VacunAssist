@@ -3,4 +3,6 @@ class Turno < ApplicationRecord
     belongs_to :user
     belongs_to :vacuna
     belongs_to :sede
+
+    validates :sede, presence: false
 end

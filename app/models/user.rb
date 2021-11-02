@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_many :turnos
   has_many :vacunas
 
-  accepts_nested_attributes_for :vacunas
+  accepts_nested_attributes_for :turnos
 end
 

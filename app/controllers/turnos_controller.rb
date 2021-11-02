@@ -4,6 +4,20 @@ class TurnosController < ApplicationController
     def index
         @turnos=Turno.where(user: current_user)
     end
+
+    def cargar
+        @turno = Turno.new
+    end
+
+    def crear
+        @turno = Turno.new(params.require(:turno).permit(:vacuna_id, :fecha, :user_id, :sede_id, :estado))
+        if @turno.save
+            redirect_to turnos_cargar_url
+        else
+            flash[:error] = "Hubo un error al cargar el turno"
+            render :cargar
+        end
+    end
   
     def show
     end
