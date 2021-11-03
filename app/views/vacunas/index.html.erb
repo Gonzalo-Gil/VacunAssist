@@ -20,10 +20,10 @@
 					<th> Cantidad de dosis </th>
 					<th> Laboratorio </th>
 				</tr>
-				<% @turnosApli = @turnos.where(estado: :completado) %>
+				<% @turnosApli = @turnos.where(estado: :completado).or(@turnos.where(estado: :previo)) %>
 				<% @turnosApli.each() do |t| %>
 					<tr>
-						<td> <%= t.vacuna.enfermedad.nombre %> </td>
+						<td> <%= t.enfermedad.nombre %> </td>
 						<td> <%= t.vacuna.cant_dosis %> </td>
 						<td> <%= t.vacuna.laboratorio.nombre %> </td>
 					</tr>

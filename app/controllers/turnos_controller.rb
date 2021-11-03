@@ -13,9 +13,6 @@ class TurnosController < ApplicationController
     def create
         @turno = Turno.new(user_id: current_user.id, estado: "pendiente", sede_id: params[:turno][:sede_id], fecha: params[:turno][:fecha])        
         @turno.enfermedad_id = params[:enfermedad_id]
-        # if params[:enfermedad_id] == nil
-        #     @turno.enfermedad_id = Enfermedad.where(nombre: "COVID").id
-        # end
         if @turno.save
             redirect_to turnos_fantasma_url
             flash[:notice] = "Turno guardado con éxito"
@@ -30,7 +27,8 @@ class TurnosController < ApplicationController
     end
 
     def crear
-        @turno = Turno.new(user_id: current_user.id, estado: "previo", enfermedad_id: params[:turno][:enfermedad_id], fecha: params[:turno][:fecha])
+        @turno = Turno.new(user_id: current_user.id, estado: "previo", vacuna_id: params[:turno][:vacuna_id], fecha: params[:turno][:fecha])
+        @turno.enfermedad_id = Vacuna.find(params[:turno][:vacuna_id]).enfermedad_id
         if @turno.save
             redirect_to turnos_cargar_url
             flash[:notice] = "Vacuna ingresada con éxito. Ingrese otra vacuna o presione 'Terminar' para salir."

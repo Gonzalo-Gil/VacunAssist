@@ -10,6 +10,7 @@ Sede.destroy_all
 Laboratorio.destroy_all
 Enfermedad.destroy_all
 Turno.destroy_all
+Vacuna.destroy_all
 
 sputnik = Laboratorio.create_or_find_by(nombre: "Sputnik")
 astra =Laboratorio.create_or_find_by(nombre: "Astrazeneca")
