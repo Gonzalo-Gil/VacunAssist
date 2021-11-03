@@ -8,7 +8,7 @@
         <div class="form-group" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <%= f.label :vacuna_id, 'Vacuna aplicada' %>
-                <%= grouped_collection_select(:turno, :vacuna_id, Enfermedad.all, :vacunas, :nombre, :id, :nombre, {multiple: :true}, { class: 'form-control'}) %>
+                <%= grouped_collection_select(:turno, :enfermedad_id, Enfermedad.all, :vacunas, :nombre, :enfermedad_id, :nombre, {multiple: :true}, { class: 'form-control'}) %>
             </div>
         </div>
         <div class="form-group" style="margin-bottom: 10px">

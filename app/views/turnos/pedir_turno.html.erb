@@ -1,35 +1,103 @@
 <div class="container-xl">
     <h1 style="text-align:center; margin-bottom:100px">Solicitar un nuevo turno</h1>
     <div class="row">
+
+
         <div class="col-sm">
             <div class="card w-auto border-dark mb-3" style="margin-bottom:20px">
                 <div class="card-body">
                     <h2 class="card-title">COVID-19</h2>
-                    <p class="card-text" style="font-size:22px">Solicitar un turno para recibir la vacuna contra el COVID-19.</p>
-                    <%= link_to "Solicitar turno", new_turno_url(id: @covid.id), class:"btn btn-outline-success" %>
+                    
+                    <% if @turnos.where(enfermedad_id: @covid.id).count != 0 %>
+                        <p class="card-text" style="font-size:22px">Solicitar un turno para recibir la vacuna contra el COVID-19.</p>
+                        
+                        <% if @turnos.where(enfermedad_id: @covid.id).where(estado: :completado).count > 0 || @turnos.where(enfermedad_id: @covid.id).where(estado: :previo).count > 0 %>
+                            <% if @turnos.where(enfermedad_id: @covid.id).where(estado: :pendiente).count > 0 %>
+                                <p>
+                                    <span style="color: red; font-size: 14px;">
+                                        Usted no puede solicitar un turno, ya que dispone de un turno pendiente para esta vacuna.
+                                    </span>
+                                </p>
+                                <%= link_to "Solicitar turno", new_turno_url(id: @covid.id), class:"btn btn-outline-success disabled" %>
+                            <% else %>
+                                <p>
+                                    <span style="color: red; font-size: 14px;">
+                                        Usted no puede solicitar un turno, porque ya se ha aplicado esta vacuna.
+                                    </span>
+                                </p>
+                                <%= link_to "Solicitar turno", new_turno_url(id: @covid.id), class:"btn btn-outline-success disabled" %>
+                            <% end %>
+                        <% elsif @turnos.where(enfermedad_id: @covid.id).where(estado: :pendiente).count > 0 %>
+                            <p>
+                                <span style="color: red; font-size: 14px;">
+                                    Usted no puede solicitar un turno, ya que dispone de un turno pendiente para esta vacuna.
+                                </span>
+                            </p>
+                            <%= link_to "Solicitar turno", new_turno_url(id: @covid.id), class:"btn btn-outline-success disabled" %>
+                        <% else %>
+                            <% if @turnos.where(enfermedad_id: @covid.id).where(estado: :cancelado).count > 0 %>
+                                <%= link_to "Solicitar turno", new_turno_url(id: @covid.id), class:"btn btn-outline-success" %>
+                            <% end %>
+                        <% end %>
+                    <% else %>
+                        <p class="card-text" style="font-size:22px">Solicitar un turno para recibir la vacuna contra el COVID-19.</p>
+                        <%= link_to "Solicitar turno", new_turno_url(id: @covid.id), class:"btn btn-outline-success" %>
+                    <% end %>
                 </div>
             </div>
         </div>
+
+
         <div class="col-sm">
             <div class="card w-auto border-dark mb-3" style="margin-bottom:20px">
                 <div class="card-body">
                     <h2 class="card-title">Gripe comun</h2>
-                    <p class="card-text" style="font-size:22px">Solicitar un turno para recibir la vacuna contra la gripe comun.</p>
-                    <%= link_to "Solicitar turno", new_turno_url(id: @gripe.id), class:"btn btn-outline-success" %>
+                    <% if @turnos.where(enfermedad_id: @gripe.id).count != 0 %>
+                        <p class="card-text" style="font-size:22px">Solicitar un turno para recibir la vacuna contra la gripe común.</p>
+                        
+                        <% if @turnos.where(enfermedad_id: @gripe.id).where(estado: :completado).count > 0 || @turnos.where(enfermedad_id: @gripe.id).where(estado: :previo).count > 0 %>
+                            <% if @turnos.where(enfermedad_id: @gripe.id).where(estado: :pendiente).count > 0 %>
+                                <p>
+                                    <span style="color: red; font-size: 14px;">
+                                        Usted no puede solicitar un turno, ya que dispone de un turno pendiente para esta vacuna.
+                                    </span>
+                                </p>
+                                <%= link_to "Solicitar turno", new_turno_url(id: @gripe.id), class:"btn btn-outline-success disabled" %>
+                            <% else %>
+                                <p>
+                                    <span style="color: red; font-size: 14px;">
+                                        Usted no puede solicitar un turno, porque ya se ha aplicado esta vacuna.
+                                    </span>
+                                </p>
+                                <%= link_to "Solicitar turno", new_turno_url(id: @gripe.id), class:"btn btn-outline-success disabled" %>
+                            <% end %>
+                        <% elsif @turnos.where(enfermedad_id: @gripe.id).where(estado: :pendiente).count > 0 %>
+                            <p>
+                                <span style="color: red; font-size: 14px;">
+                                    Usted no puede solicitar un turno, ya que dispone de un turno pendiente para esta vacuna.
+                                </span>
+                            </p>
+                            <%= link_to "Solicitar turno", new_turno_url(id: @gripe.id), class:"btn btn-outline-success disabled" %>
+                        <% else %>
+                            <% if @turnos.where(enfermedad_id: @gripe.id).where(estado: :cancelado).count > 0 %>
+                                <%= link_to "Solicitar turno", new_turno_url(id: @gripe.id), class:"btn btn-outline-success" %>
+                            <% end %>
+                        <% end %>
+                    <% else %>
+                        <p class="card-text" style="font-size:22px">Solicitar un turno para recibir la vacuna contra la gripe común.</p>
+                        <%= link_to "Solicitar turno", new_turno_url(id: @gripe.id), class:"btn btn-outline-success" %>
+                    <% end %>
                 </div>
             </div>
         </div>
+
+
         <div class="col-sm">
             <div class="card w-auto border-dark mb-3">
                 <div class="card-body">
                     <h2 class="card-title">Fiebre amarilla</h2>                    
-                    <% if Date.today.year - current_user.fecha_nacimiento.year - ((Date.today.month >= current_user.fecha_nacimiento.month || (Date.today.month >= current_user.fecha_nacimiento.month && Date.today.day >= current_user.fecha_nacimiento.day)) ? 0 : 1) < 20 %>
+                    <% if Date.today.year - current_user.fecha_nacimiento.year - ((Date.today.month >= current_user.fecha_nacimiento.month || (Date.today.month >= current_user.fecha_nacimiento.month && Date.today.day >= current_user.fecha_nacimiento.day)) ? 0 : 1) > 20 %>
                         <p class="card-text" style="font-size:22px">Solicitar un turno para recibir la vacuna contra la fiebre amarilla.</p>
-                        <%= link_to "Solicitar turno", new_turno_url(id: @fiebre.id), class:"btn btn-outline-success" %>
-                    <% else %>                        
-                        <p class="card-text" style="font-size:22px">
-                            Solicitar un turno para recibir la vacuna contra la fiebre amarilla.<br>                            
-                        </p>
                         <p>
                             <span style="color: red; font-size: 14px;">
                                 Por razones de salud no se le recomienda apliarse esta vacuna.
@@ -37,6 +105,40 @@
                             </span>
                         </p>
                         <%= link_to "Solicitar turno", new_turno_url(id: @fiebre.id), class:"btn btn-outline-success disabled"%>
+                    <% elsif @turnos.where(enfermedad_id: @fiebre.id).count != 0 %>
+                        <p class="card-text" style="font-size:22px">Solicitar un turno para recibir la vacuna contra la fiebre amarilla.</p>
+                    
+                        <% if @turnos.where(enfermedad_id: @fiebre.id).where(estado: :completado).count > 0 || @turnos.where(enfermedad_id: @fiebre.id).where(estado: :previo).count > 0 %>
+                            <% if @turnos.where(enfermedad_id: @fiebre.id).where(estado: :pendiente).count > 0 %>
+                                <p>
+                                    <span style="color: red; font-size: 14px;">
+                                        Usted no puede solicitar un turno, ya que dispone de un turno pendiente para esta vacuna.
+                                    </span>
+                                </p>
+                                <%= link_to "Solicitar turno", new_turno_url(id: @fiebre.id), class:"btn btn-outline-success disabled" %>
+                            <% else %>
+                                <p>
+                                    <span style="color: red; font-size: 14px;">
+                                        Usted no puede solicitar un turno, porque ya se ha aplicado esta vacuna.
+                                    </span>
+                                </p>
+                                <%= link_to "Solicitar turno", new_turno_url(id: @fiebre.id), class:"btn btn-outline-success disabled" %>
+                            <% end %>
+                        <% elsif @turnos.where(enfermedad_id: @fiebre.id).where(estado: :pendiente).count > 0 %>
+                            <p>
+                                <span style="color: red; font-size: 14px;">
+                                    Usted no puede solicitar un turno, ya que dispone de un turno pendiente para esta vacuna.
+                                </span>
+                            </p>
+                            <%= link_to "Solicitar turno", new_turno_url(id: @fiebre.id), class:"btn btn-outline-success disabled" %>
+                        <% else %>
+                            <% if @turnos.where(enfermedad_id: @fiebre.id).where(estado: :cancelado).count > 0 %>
+                                <%= link_to "Solicitar turno", new_turno_url(id: @fiebre.id), class:"btn btn-outline-success" %>
+                            <% end %>
+                        <% end %>
+                    <% else %>
+                        <p class="card-text" style="font-size:22px">Solicitar un turno para recibir la vacuna contra la fiebre amarilla.</p>
+                        <%= link_to "Solicitar turno", new_turno_url(id: @fiebre.id), class:"btn btn-outline-success" %>
                     <% end %>
                 </div>
             </div>
