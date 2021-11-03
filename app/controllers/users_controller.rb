@@ -3,4 +3,5 @@ class UsersController < ApplicationController
     def show
         @user = User.where(user: current_user)
     end
+
 end
