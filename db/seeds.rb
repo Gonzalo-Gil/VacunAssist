@@ -24,9 +24,9 @@ sede1 = Sede.create_or_find_by(nombre: "Sede 1", calle: 1, numero: 123)
 sede2 = Sede.create_or_find_by(nombre: "Sede 2", calle: 2, numero: 456)
 sede3 = Sede.create_or_find_by(nombre: "Sede 3", calle: 3, numero: 789)
 
-vGripe= Vacuna.create_or_find_by(enfermedad: eGripe, cant_dosis: 1, laboratorio: astra)
-vFiebre= Vacuna.create_or_find_by(enfermedad: eFiebre, cant_dosis: 1, laboratorio: sputnik)
-vCovid= Vacuna.create_or_find_by(enfermedad: eCovid, cant_dosis: 2, laboratorio: sino)
+vGripe= Vacuna.create_or_find_by(enfermedad: eGripe, cant_dosis: 1, laboratorio: astra, nombre: "AstraZeneca")
+vFiebre= Vacuna.create_or_find_by(enfermedad: eFiebre, cant_dosis: 1, laboratorio: sputnik, nombre: "Sputnik V")
+vCovid= Vacuna.create_or_find_by(enfermedad: eCovid, cant_dosis: 2, laboratorio: sino, nombre: "Sinopharm")
 
 Turno.create_or_find_by(fecha: 17/06/2021, sede: sede1, vacuna: vGripe, user_id: 1, estado: 2)
 Turno.create_or_find_by(fecha: 9/02/2020, sede: sede2, vacuna: vCovid, user_id: 1, estado: 2)
