@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-    include ActionView::Helpers::UrlHelper
     before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :check_tiene_vacuna_covid, unless: :devise_controller?
 
@@ -8,7 +7,6 @@ class ApplicationController < ActionController::Base
     end
 
     def check_tiene_vacuna_covid 
-        return if current_page?('/turnos/new') 
         if user_signed_in? 
             @covid19 = Enfermedad.where(nombre: "COVID").first
             tieneVacunaCovid = current_user.turnos.where(enfermedad_id: @covid19.id).count

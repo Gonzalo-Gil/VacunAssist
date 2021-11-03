@@ -1,5 +1,5 @@
 class TurnosController < ApplicationController
-    skip_before_action :check_tiene_vacuna_covid, only: [:new, :create, :fantasma]
+    skip_before_action :check_tiene_vacuna_covid, only: [:new, :create, :fantasma, :cargar, :crear]
   
     before_action :authenticate_user!
     def index
