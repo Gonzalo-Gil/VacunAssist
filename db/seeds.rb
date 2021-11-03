@@ -28,6 +28,6 @@ vGripe= Vacuna.create_or_find_by(enfermedad: eGripe, cant_dosis: 1, laboratorio:
 vFiebre= Vacuna.create_or_find_by(enfermedad: eFiebre, cant_dosis: 1, laboratorio: sputnik, nombre: "Sputnik V")
 vCovid= Vacuna.create_or_find_by(enfermedad: eCovid, cant_dosis: 2, laboratorio: sino, nombre: "Sinopharm")
 
-Turno.create_or_find_by(fecha: 17/06/2021, sede: sede1, vacuna: vGripe, user_id: 1, estado: 2)
-Turno.create_or_find_by(fecha: 9/02/2020, sede: sede2, vacuna: vCovid, user_id: 1, estado: 2)
-Turno.create_or_find_by(fecha: 3/12/2021, sede: sede3, vacuna: vGripe, user_id: 1, estado: 0)
+Turno.create_or_find_by(fecha: 17/06/2021, sede: sede1, vacuna: vGripe, user_id: 1, estado: 2, enfermedad: eGripe)
+Turno.create_or_find_by(fecha: 9/02/2020, sede: sede2, vacuna: vCovid, user_id: 1, estado: 2, enfermedad: eCovid)
+Turno.create_or_find_by(fecha: 3/12/2021, sede: sede3, vacuna: vGripe, user_id: 1, estado: 0, enfermedad: eGripe)

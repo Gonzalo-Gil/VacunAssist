@@ -3,4 +3,5 @@ class Turno < ApplicationRecord
     belongs_to :user
     belongs_to :vacuna, optional: true
     belongs_to :sede, optional: true
+    belongs_to :enfermedad
 end

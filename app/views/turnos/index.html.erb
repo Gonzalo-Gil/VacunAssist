@@ -28,7 +28,7 @@
 					<% end %>
 			<% @turnos.each_with_index do |t,index| %>
 				<tr> 
-					<td>  <%=t.vacuna.enfermedad.nombre.capitalize%> </td> 
+					<td>  <%=t.enfermedad.nombre.capitalize%> </td> 
 					<td> <%= t.estado %> </td> 
 					<td> <% if t.estado == 'pendiente' %>
 						<!-- Boton del modal -->
