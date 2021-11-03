@@ -1,4 +1,5 @@
 class TurnosController < ApplicationController
+    skip_before_action :check_tiene_vacuna_covid, only: [:new, :create, :fantasma]
   
     before_action :authenticate_user!
     def index
@@ -7,25 +8,20 @@ class TurnosController < ApplicationController
 
     def new
         @turno = Turno.new
-        if params[:id].to_i == 1
-            @turno.vacuna_id = 10
-        end
     end
 
     def create
-        @turno = Turno.new(user_id: current_user.id, estado: "pendiente", sede_id: params[:turno][:sede_id], enfermedad_id: params[:turno][:enfermedad_id], fecha: params[:turno][:fecha])
-        if Sede.find(params[:turno][:sede_id].to_i).turno.where(fecha: params[:turno][:fecha]).count < 3
-            @turno.enfermedad_id = params[:enfermedad_id]
-            if @turno.save
-                redirect_to turnos_path
-                flash[:notice] = "Turno guardado con éxito"
-            else                
-                redirect_to new_turno_url
-                flash[:alert] = "Hubo un error al pedir el turno"
-            end
-        else            
+        @turno = Turno.new(user_id: current_user.id, estado: "pendiente", sede_id: params[:turno][:sede_id], fecha: params[:turno][:fecha])        
+        @turno.enfermedad_id = params[:enfermedad_id]
+        # if params[:enfermedad_id] == nil
+        #     @turno.enfermedad_id = Enfermedad.where(nombre: "COVID").id
+        # end
+        if @turno.save
+            redirect_to turnos_fantasma_url
+            flash[:notice] = "Turno guardado con éxito"
+        else                
             redirect_to new_turno_url
-            flash[:alert] = "No hay turnos disponibles para la fecha seleccionada"
+            flash[:alert] = "Hubo un error al pedir el turno"
         end
     end
 
@@ -45,6 +41,9 @@ class TurnosController < ApplicationController
     end
   
     def pedir_turno
+        @covid = Enfermedad.where(nombre: "COVID").first
+        @gripe = Enfermedad.where(nombre: "Gripe").first
+        @fiebre = Enfermedad.where(nombre: "Fiebre amarilla").first
     end
 
     def show
@@ -63,5 +62,9 @@ class TurnosController < ApplicationController
     end
     
     def destroy
+    end
+
+    def fantasma
+        redirect_to turnos_path
     end
   end

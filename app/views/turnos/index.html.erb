@@ -45,7 +45,7 @@
 								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
 							<div class="modal-body">
-								¿Desea cancelar el turno para: <%=t.vacuna.enfermedad.nombre.capitalize%>?
+								¿Desea cancelar el turno para: <%=t.enfermedad.nombre.capitalize%>?
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
@@ -64,7 +64,7 @@
 						<div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="cancelarModalLabel">Turno para la vacuna contra <%= t.vacuna.enfermedad.nombre %> </h5>
+								<h5 class="modal-title" id="cancelarModalLabel">Turno para la vacuna contra <%= t.enfermedad.nombre %> </h5>
 								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
 							<div class="modal-body">

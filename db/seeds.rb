@@ -18,7 +18,7 @@ sino = Laboratorio.create_or_find_by(nombre: "Sinopharm")
 
 eGripe = Enfermedad.create_or_find_by(nombre: "Gripe")
 eFiebre = Enfermedad.create_or_find_by(nombre: "Fiebre amarilla")
-eCovid = Enfermedad.create_or_find_by(nombre: "COVID-19")
+eCovid = Enfermedad.create_or_find_by(nombre: "COVID")
 
 sede1 = Sede.create_or_find_by(nombre: "Sede 1", calle: 1, numero: 123)
 sede2 = Sede.create_or_find_by(nombre: "Sede 2", calle: 2, numero: 456)

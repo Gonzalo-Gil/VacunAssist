@@ -10,10 +10,10 @@ class ApplicationController < ActionController::Base
     def check_tiene_vacuna_covid 
         return if current_page?('/turnos/new') 
         if user_signed_in? 
-            tieneVacunaCovid = current_user.turnos.joins(vacuna: [:enfermedad]).where("enfermedads.nombre = '#{Enfermedad::COVID}'")
-            if !tieneVacunaCovid.exists? 
-                redirect_to new_turno_path, notice: "Por favor solicite turno para COVID-19"
-
+            @covid19 = Enfermedad.where(nombre: "COVID").first
+            tieneVacunaCovid = current_user.turnos.where(enfermedad_id: @covid19.id).count
+            if tieneVacunaCovid == 0
+                redirect_to new_turno_path(id: @covid19.id), notice: "Por favor solicite turno para COVID-19"
             end
         end
     end
