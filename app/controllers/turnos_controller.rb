@@ -3,7 +3,7 @@ class TurnosController < ApplicationController
   
     before_action :authenticate_user!
     def index
-        @turnos=Turno.where(user: current_user)
+        @turnos=Turno.where(["user_id = ? and estado != ?", current_user.id, 3])
     end
 
     def new

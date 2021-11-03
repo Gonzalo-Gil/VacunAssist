@@ -32,12 +32,12 @@
 					<td> <%= t.estado %> </td> 
 					<td> <% if t.estado == 'pendiente' %>
 						<!-- Boton del modal -->
-						<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelarModal">
+						<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelarModal<%=index.to_s%>">
 						Cancelar turno
 						</button>
 
 						<!-- Modal -->
-						<div class="modal fade" id="cancelarModal" tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
+						<div class="modal fade" id="cancelarModal<%=index.to_s%>" tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content">
 							<div class="modal-header">
