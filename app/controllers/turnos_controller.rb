@@ -7,16 +7,25 @@ class TurnosController < ApplicationController
 
     def new
         @turno = Turno.new
+        if params[:id].to_i == 1
+            @turno.vacuna_id = 10
+        end
     end
 
     def create
-        @turno = Turno.new(user_id: current_user.id, estado: "pendiente", sede_id: params[:turno][:sede_id], fecha: params[:turno][:fecha])
-        if @turno.save
-            redirect_to turnos_path
-            flash[:notice] = "Turno guardado con éxito"
-        else
-            flash[:error] = "Hubo un error al pedir el turno"
-            render :new
+        @turno = Turno.new(user_id: current_user.id, estado: "pendiente", sede_id: params[:turno][:sede_id], enfermedad_id: params[:turno][:enfermedad_id], fecha: params[:turno][:fecha])
+        if Sede.find(params[:turno][:sede_id].to_i).turno.where(fecha: params[:turno][:fecha]).count < 3
+            @turno.enfermedad_id = params[:enfermedad_id]
+            if @turno.save
+                redirect_to turnos_path
+                flash[:notice] = "Turno guardado con éxito"
+            else                
+                redirect_to new_turno_url
+                flash[:alert] = "Hubo un error al pedir el turno"
+            end
+        else            
+            redirect_to new_turno_url
+            flash[:alert] = "No hay turnos disponibles para la fecha seleccionada"
         end
     end
 

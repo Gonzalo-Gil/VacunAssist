@@ -9,6 +9,6 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :turnos
 
-  
+  validates :dni, uniqueness: true
 end
 
