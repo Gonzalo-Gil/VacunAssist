@@ -4,8 +4,8 @@
 
 
         <div class="col-sm">
-            <div class="card w-auto border-dark mb-3" style="margin-bottom:20px">
-                <div class="card-body">
+            <div class="card w-auto" style="margin-bottom:20px">
+                <div class="card-body my-card">
                     <h2 class="card-title">COVID-19</h2>
                     
                     <% if @turnos.where(enfermedad_id: @covid.id).count != 0 %>
@@ -49,8 +49,8 @@
 
 
         <div class="col-sm">
-            <div class="card w-auto border-dark mb-3" style="margin-bottom:20px">
-                <div class="card-body">
+            <div class="card w-auto" style="margin-bottom:20px">
+                <div class="card-body my-card">
                     <h2 class="card-title">Gripe comun</h2>
                     <% if @turnos.where(enfermedad_id: @gripe.id).count != 0 %>
                         <p class="card-text" style="font-size:22px">Solicitar un turno para recibir la vacuna contra la gripe común.</p>
@@ -93,8 +93,8 @@
 
 
         <div class="col-sm">
-            <div class="card w-auto border-dark mb-3">
-                <div class="card-body">
+            <div class="card w-auto" style="margin-bottom:20px">
+                <div class="card-body my-card">
                     <h2 class="card-title">Fiebre amarilla</h2>                    
                     <% if Date.today.year - current_user.fecha_nacimiento.year - ((Date.today.month >= current_user.fecha_nacimiento.month || (Date.today.month >= current_user.fecha_nacimiento.month && Date.today.day >= current_user.fecha_nacimiento.day)) ? 0 : 1) > 60 %>
                         <p class="card-text" style="font-size:22px">Solicitar un turno para recibir la vacuna contra la fiebre amarilla.</p>

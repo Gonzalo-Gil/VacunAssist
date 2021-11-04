@@ -21,7 +21,7 @@
     <div class="form-group" style="margin-bottom: 10px">
       <div class="col-md-4">
         <%= f.label :dni %><br />
-        <%= f.number_field :dni, class: 'form-control', required: true %>
+        <%= f.number_field :dni, class: 'form-control', required: true, placeholder: "Ingrese su número de documento" %>
       </div>
     </div>
 
@@ -35,22 +35,22 @@
     <div class="form-group" style="margin-bottom: 10px">
       <div class="col-md-4">
         <%= f.label :telefono %><br />
-        <%= f.telephone_field :telefono, class: 'form-control', required: true %>
+        <%= f.telephone_field :telefono, class: 'form-control', required: true, placeholder: "Ingrese su número de telefono" %>
       </div>
     </div>
 
     <div class="form-group" style="margin-bottom: 10px">
       <div class="col-md-4">
         <%= f.label :email %><br />
-        <%= f.email_field :email, class: 'form-control', autocomplete: "email", placeholder: "mail@example.com" %>
+        <%= f.email_field :email, class: 'form-control', autocomplete: "email", placeholder: "mail@ejemplo.com" %>
       </div>
     </div>
 
     <div class="form-group" style="margin-bottom: 10px">
       <div class="col-md-4">
-        <%= f.label :password %>
+        <%= f.label :password, "Contraseña" %>
         <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <em>(<%= @minimum_password_length %> caracteres como minimo)</em>
         <% end %><br />
         <%= f.password_field :password, class: 'form-control', autocomplete: "new-password", placeholder: "******" %>
       </div>
@@ -58,7 +58,7 @@
 
     <div class="form-group" style="margin-bottom: 10px">
       <div class="col-md-4">
-        <%= f.label :password_confirmation %><br />
+        <%= f.label :password_confirmation, "Repita la contraseña" %><br />
         <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "new-password", placeholder: "******" %>
       </div>
     </div>
