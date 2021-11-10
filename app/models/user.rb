@@ -10,5 +10,14 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :turnos
 
   validates :dni, uniqueness: true
+  validates :email, uniqueness: false
+  
+  def email_required?
+    false
+  end
+
+  def will_save_change_to_email?
+    false
+  end
 end
 
