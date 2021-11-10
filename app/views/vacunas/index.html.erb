@@ -9,6 +9,7 @@
 					<th> Enfermedad </th>
 					<th> Cantidad de dosis </th>
 					<th> Laboratorio </th>
+					<th> Fecha de aplicación </th>
 				</tr>
 				<% @turnosApli = @turnos.where(estado: :completado).or(@turnos.where(estado: :previo)) %>
 				<% @turnosApli.each() do |t| %>
@@ -16,6 +17,7 @@
 						<td> <%= t.enfermedad.nombre %> </td>
 						<td> <%= t.vacuna.cant_dosis %> </td>
 						<td> <%= t.vacuna.laboratorio.nombre %> </td>
+						<td> <%= t.fecha.strftime('%d/%m/%Y') %> </td>
 					</tr>
 				<% end %>
 
