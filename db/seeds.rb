@@ -23,9 +23,9 @@ eGripe = Enfermedad.create_or_find_by(nombre: "Gripe")
 eFiebre = Enfermedad.create_or_find_by(nombre: "Fiebre amarilla")
 eCovid = Enfermedad.create_or_find_by(nombre: "COVID")
 
-sede1 = Sede.create_or_find_by(nombre: "Sede 1", calle: 1, numero: 123)
-sede2 = Sede.create_or_find_by(nombre: "Sede 2", calle: 2, numero: 456)
-sede3 = Sede.create_or_find_by(nombre: "Sede 3", calle: 3, numero: 789)
+sede1 = Sede.create_or_find_by(nombre: "Sede zona cementerio municipal", calle: 131, numero: 2000)
+sede2 = Sede.create_or_find_by(nombre: "Sede zona municipalidad", calle: 51, numero: 807)
+sede3 = Sede.create_or_find_by(nombre: "Sede zona terminal de omnibus", calle: 4, numero: 500)
 
 vGripe= Vacuna.create_or_find_by(enfermedad: eGripe, cant_dosis: 1, laboratorio: labGripe, nombre: "Vacuna contra la Gripe")
 vFiebre= Vacuna.create_or_find_by(enfermedad: eFiebre, cant_dosis: 1, laboratorio: labFiebre, nombre: "Vacuna contra la Fiebre Amarilla")
