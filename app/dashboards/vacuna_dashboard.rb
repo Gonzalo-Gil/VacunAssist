@@ -10,7 +10,6 @@ class VacunaDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     enfermedad: Field::BelongsTo,
     laboratorio: Field::BelongsTo,
-    users: Field::HasMany,
     id: Field::Number,
     cant_dosis: Field::Number,
     created_at: Field::DateTime,
@@ -26,7 +25,6 @@ class VacunaDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     enfermedad
     laboratorio
-    users
     id
   ].freeze
 
@@ -35,7 +33,6 @@ class VacunaDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     enfermedad
     laboratorio
-    users
     id
     cant_dosis
     created_at
@@ -49,7 +46,6 @@ class VacunaDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     enfermedad
     laboratorio
-    users
     cant_dosis
     nombre
   ].freeze
