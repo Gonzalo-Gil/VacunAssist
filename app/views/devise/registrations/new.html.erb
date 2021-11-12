@@ -28,7 +28,7 @@
     <div class="form-group" style="margin-bottom: 10px">
       <div class="col-md-4">
         <%= f.label :fecha_nacimiento, 'Fecha de nacimiento' %>
-        <%= f.date_field :fecha_nacimiento, class: 'form-control', required: true %>
+        <%= f.date_field :fecha_nacimiento, class: 'form-control', min: Date.new(1900, 1, 1), max: Date.today, required: true %>
       </div>
     </div>
 

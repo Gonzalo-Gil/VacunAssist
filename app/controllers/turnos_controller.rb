@@ -13,6 +13,7 @@ class TurnosController < ApplicationController
 
     def create
         @turno = Turno.new(user_id: current_user.id, estado: "pendiente", sede_id: params[:turno][:sede_id], fecha: params[:turno][:fecha])        
+<<<<<<< HEAD
         @turno.enfermedad_id = params[:turno][:enfermedad_id]
         if @turno.save
             redirect_to turnos_fantasma_url
@@ -20,6 +21,20 @@ class TurnosController < ApplicationController
         else                
             redirect_to new_turno_url(id: @turno.enfermedad_id)
             flash[:alert] = "Hubo un error al pedir el turno"
+=======
+        @turno.enfermedad_id = params[:enfermedad_id]
+        if (@turno.fecha.year != Date.tomorrow.year ||(@turno.fecha.month < Date.tomorrow.month && @turno.fecha.day < Date.tomorrow.day))
+            redirect_to new_turno_url
+            flash[:alert] = "Fecha ingresada no valida. Intente nuevamente"
+        else
+            if @turno.save
+                redirect_to turnos_fantasma_url
+                flash[:notice] = "Turno guardado con éxito"
+            else                
+                redirect_to new_turno_url
+                flash[:alert] = "Hubo un error al pedir el turno"
+            end
+>>>>>>> b89ec0b95601a7319e8e466b5e4174fe25eb401e
         end
     end
 

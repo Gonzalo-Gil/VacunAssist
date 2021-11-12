@@ -31,3 +31,21 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        dni: "DNI"
+        password: "Contraseña"
+        password_confirmation: "La confirmación de contraseña"
+    errors:
+      models:
+        user:
+          attributes:
+            dni:
+              taken: "ya utilizado"
+            password_confirmation:
+              confirmation: "no coincide con la %{attribute} ingresada"
+            password:
+              too_short:
+                one: muy corta (minimo 1 caracter)
+                other: muy corta (minimo %{count} caracteres)
