@@ -1,10 +1,10 @@
-<div class="container">
-    <h2 style="margin-top: 20px">Pedir un turno</h2>
+<div class="container" id="nuevo_turno">
+    <h2 style="margin-top: 20px">Pedir un turno para: <%= @enfermedad.nombre %></h2>
     <%= form_for(@turno) do |f| %>
         <div class="form-group" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <%= f.label :sede_id, 'Elija la sede donde desea aplicarse la vacuna' %>
-                <%= collection_select(:turno, :sede_id, Sede.all, :id, :nombre, {multiple: :true}, { class: 'form-control'}) %>
+                <%= f.collection_select(:sede_id, Sede.all, :id, :nombre, {multiple: :true}, { class: 'form-control'}) %>
             </div>
         </div>
         <div class="form-group" style="margin-bottom: 10px">
@@ -15,7 +15,7 @@
         </div>
         <div class="form-group" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <%= hidden_field_tag 'enfermedad_id', [params[:id]] %>
+                <%= f.hidden_field 'enfermedad_id', value: @enfermedad.id %>
             </div>
         </div>
         

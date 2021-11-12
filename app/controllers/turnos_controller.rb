@@ -7,17 +7,18 @@ class TurnosController < ApplicationController
     end
 
     def new
+        @enfermedad = Enfermedad.find(params[:id])
         @turno = Turno.new
     end
 
     def create
         @turno = Turno.new(user_id: current_user.id, estado: "pendiente", sede_id: params[:turno][:sede_id], fecha: params[:turno][:fecha])        
-        @turno.enfermedad_id = params[:enfermedad_id]
+        @turno.enfermedad_id = params[:turno][:enfermedad_id]
         if @turno.save
             redirect_to turnos_fantasma_url
             flash[:notice] = "Turno guardado con éxito"
         else                
-            redirect_to new_turno_url
+            redirect_to new_turno_url(id: @turno.enfermedad_id)
             flash[:alert] = "Hubo un error al pedir el turno"
         end
     end
