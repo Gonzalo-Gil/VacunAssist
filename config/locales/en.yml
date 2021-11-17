@@ -36,7 +36,7 @@ en:
       user:
         dni: "DNI"
         password: "Contraseña"
-        password_confirmation: "La confirmación de contraseña"
+        password_confirmation: "Confirmación de contraseña"
     errors:
       models:
         user:

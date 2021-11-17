@@ -20,21 +20,16 @@ class EnfermedadDashboard < Administrate::BaseDashboard
   #
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
-  COLLECTION_ATTRIBUTES = %i[
-    vacunas
-    id
+  COLLECTION_ATTRIBUTES = %i[    
     nombre
-    created_at
+    vacunas
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    vacunas
-    id
     nombre
-    created_at
-    updated_at
+    vacunas    
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -60,7 +55,7 @@ class EnfermedadDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how enfermedads are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(enfermedad)
-  #   "Enfermedad ##{enfermedad.id}"
-  # end
+  def display_resource(enfermedad)
+    "#{enfermedad.nombre}"
+  end
 end

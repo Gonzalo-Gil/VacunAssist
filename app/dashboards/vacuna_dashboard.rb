@@ -25,7 +25,6 @@ class VacunaDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     enfermedad
     laboratorio
-    id
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -65,7 +64,7 @@ class VacunaDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how vacunas are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(vacuna)
-  #   "Vacuna ##{vacuna.id}"
-  # end
+  def display_resource(vacuna)
+    "#{vacuna.nombre}"
+  end
 end

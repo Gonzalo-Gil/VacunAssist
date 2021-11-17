@@ -23,22 +23,16 @@ class SedeDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    turno
-    id
     nombre
-    calle
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = %i[
-    turno
-    id
+  SHOW_PAGE_ATTRIBUTES = %i[    
     nombre
     calle
     numero
-    created_at
-    updated_at
+    turno
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -66,7 +60,7 @@ class SedeDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how sedes are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(sede)
-  #   "Sede ##{sede.id}"
-  # end
+  def display_resource(sede)
+    "#{sede.nombre}"
+  end
 end
