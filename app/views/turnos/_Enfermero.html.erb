@@ -1,0 +1,28 @@
+<div class="d-flex flex-column justify-content-center align-items-center" style= " padding-top: 20px;">		
+	<div class="card text-center mx-auto" style= "width: 90%; ">
+			<div class="card-body">
+				<h1 class="card-title">Turnos</h1>
+				<table class="table table-bordered">
+					<% if @turnos.size != 0 %>
+						<tr>
+                            <th> Nombre y apellido </th>
+							<th> Enfermedad </th>
+							<th> Estado</th>
+							<th> Opciones</th>
+						</tr>
+					<% end %>
+			<% @turnos.each_with_index do |t,index| %>
+				<tr>
+                    <td>  <%=t.user.nombre.capitalize t.user.apellido.capitalize%>  </td> 
+					<td>  <%=t.enfermedad.nombre.capitalize%> </td> 
+					<td> <%= t.estado %> </td> 
+					<td> </td>
+				</tr>
+			<% end %>
+			<% if @turnos.size == 0 %>
+				<tr> <td colspan="3"> No hay más turnos para el día. </td> </tr>
+			<% end %>
+		</table>
+	</div>
+</div>
+
