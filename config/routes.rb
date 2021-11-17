@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   get 'turnos/fantasma', to: 'turnos#fantasma', as: :turnos_fantasma
   resources :turnos
   resources :vacunas
-
   get 'pages/home'  
   
   root 'pages#home'
