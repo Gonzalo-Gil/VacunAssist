@@ -31,6 +31,7 @@
 
 en:
   hello: "Hello world"
+  
   activerecord:
     attributes:
       user:
@@ -49,3 +50,29 @@ en:
               too_short:
                 one: muy corta (minimo 1 caracter)
                 other: muy corta (minimo %{count} caracteres)
+  administrate: 
+    actions:
+      confirm: ¿Estás seguro?
+      destroy: Eliminar
+      edit: Editar
+      edit_resource: Editar %{name}
+      show_resource: Ver %{name}
+      new_resource: Nuevo/a %{name}
+      back: Atras
+    controller:
+      create:
+        success: "%{resource} se creó correctamente."
+      destroy:
+        success: "%{resource} se eliminó correctamente."
+      update:
+        success: "%{resource} se editó correctamente."
+    form:
+      error: problema
+      errors: "%{pluralized_errors} impidieron que %{resource_name} se guarde:"
+    fields:
+      has_many:
+        more: Mostrando %{count} de %{total_count}
+        none: Vacio
+    search:
+      clear: Limpiar busqueda
+      label: Buscar %{resource}
