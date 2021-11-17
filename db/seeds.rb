@@ -35,6 +35,6 @@ vCovidSputnik= Vacuna.create_or_find_by(enfermedad: eCovid, cant_dosis: 2, labor
 vCovidModerna= Vacuna.create_or_find_by(enfermedad: eCovid, cant_dosis: 2, laboratorio: moderna, nombre: "Moderna")
 
 
-Turno.create_or_find_by(fecha: Date.new(2021,06,17), sede: sede1, vacuna: vCovidSino, user_id: 1, estado: 2, enfermedad: eCovid)
-Turno.create_or_find_by(fecha: Date.new(2021,04,04), sede: sede2, vacuna: vFiebre, user_id: 1, estado: 2, enfermedad: eFiebre)
+Turno.create_or_find_by(fecha: Date.today, sede: sede1, vacuna: vCovidSino, user_id: 19, estado: 2, enfermedad: eCovid)
+Turno.create_or_find_by(fecha: Date.today, sede: sede2, vacuna: vFiebre, user_id: 19, estado: 2, enfermedad: eFiebre)
 

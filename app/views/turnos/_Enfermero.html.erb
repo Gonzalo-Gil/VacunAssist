@@ -13,7 +13,7 @@
 					<% end %>
 			<% @turnos.each_with_index do |t,index| %>
 				<tr>
-                    <td>  <%=t.user.nombre.capitalize t.user.apellido.capitalize%>  </td> 
+                    <td>  <%=t.user.nombre.capitalize%> <%= t.user.apellido.capitalize%>  </td>
 					<td>  <%=t.enfermedad.nombre.capitalize%> </td> 
 					<td> <%= t.estado %> </td> 
 					<td> </td>
