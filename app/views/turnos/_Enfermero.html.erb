@@ -19,7 +19,8 @@
 			<% else %>
 				<% @turnos.each_with_index do |t,index| %>
 						<tr>
-							<td>  <%= link_to t.user.nombre.capitalize t.user.apellido.capitalize %> </td> 
+							<td>  <% paciente=t.user.nombre.capitalize+ " " +t.user.apellido.capitalize %>
+							<%= link_to paciente %> </td> 
 							<td>  <%= t.enfermedad.nombre %> </td> 
 							<td> 
 							<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelarModal<%=index.to_s%>">
@@ -57,12 +58,15 @@
 											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
 										<div class="modal-body">
-											<% if t.enfermedad.nombre == "COVID" %>
-
+											<h5>Laboratorio: </h5>
+											<%= form_for(t.vacuna, url: edit_turno_path(id: t.id), html: { method: :get }) do |f| %>
+											<%= f.hidden_field 'aplicado', value: "true"%>
+											<%= f.collection_select(:laboratorio_id , Vacuna.where(enfermedad_id: t.enfermedad.id), :id, :nombre,  {class: "form-control" }) %>
+											<%= f.submit "Confirmar"%>
 											<%end%>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Continuar</button>
+										</div>
+		
+									</div>	
 								</div>
 							</div>
 							</div>
