@@ -19,7 +19,54 @@
 			<% else %>
 				<% @turnos.each_with_index do |t,index| %>
 						<tr>
-							<td>  <%= link_to t.user.nombre.capitalize t.user.apellido.capitalize %> </td> 
+							<td>
+								<% paciente=t.user.nombre.capitalize+ " " +t.user.apellido.capitalize %>
+								<a class="links" href="#" role="button" data-bs-toggle="modal" data-bs-target="#userModal<%=index.to_s%>">
+									<%= paciente %>
+								</a> 
+								<!-- Modal -->
+								<div class="modal fade" id="userModal<%=index.to_s%>" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="userModalLabel"> Datos del paciente </h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												Nombre: <%= paciente %><br>
+												Fecha de nacimiento: <%= t.user.fecha_nacimiento.strftime('%d/%m/%Y') %><br>
+												Vacunas previas:<br>
+												<table class="table table-bordered">
+													<thead>
+														<% if @turnosPrevios.size != 0 %>
+															<tr>
+																<th scope="col">Enfermedad</th>
+																<th scope="col">Laboratorio</th>
+																<th scope="col">Fecha de aplicación</th>
+															</tr>
+														<% end %>
+													</thead>
+													<tbody>
+														<% if @turnosPrevios.size == 0 %>
+															<tr> <td colspan="3"> No tiene vacunas previas. </td> </tr>
+														<% else %>
+															<% @turnosPrevios.each_with_index do |tp,index| %>
+																<tr>
+																	<td> <%= tp.enfermedad.nombre %> </td>
+																	<td> <%= tp.vacuna.laboratorio.nombre %> </td>
+																	<td> <%= tp.fecha.strftime('%d/%m/%Y') %> </td>
+																</tr>
+															<% end %>
+														<% end %>
+													</tbody>
+												</table>
+											</div>
+											<div class="modal-footer">
+											</div>
+										</div>
+									</div>
+								</div>
+							</td> 
 							<td>  <%= t.enfermedad.nombre %> </td> 
 							<td> 
 							<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelarModal<%=index.to_s%>">

@@ -8,6 +8,7 @@ class TurnosController < ApplicationController
             @turnos=Turno.where(["user_id = ? and estado != ?", current_user.id, 3])
         when "enfermero"
             @turnos=Turno.where(["fecha = ? and estado != ?", Date.today, 2])
+            @turnosPrevios=Turno.where(["user_id = ? and estado = ?", current_user.id, 3])
         end
     end
 
