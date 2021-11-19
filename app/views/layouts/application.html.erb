@@ -11,8 +11,17 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body> 
-    <%= render 'layouts/navbar' %>
+  <body>
+    <% if user_signed_in? %> 
+      <% case current_user.role %>
+        <%  when "paciente" %>
+          <%= render 'layouts/navbar' %>
+        <%  when "enfermero" %>
+            <%= render 'layouts/navbarEnfermero' %>
+      <% end %>
+    <% else %>
+      <%= render 'layouts/navbar' %>
+    <% end %>
     <% if notice %>
         <p class="alert alert-primary alert-dismissible fade show" role="alert">
           <%= notice %>

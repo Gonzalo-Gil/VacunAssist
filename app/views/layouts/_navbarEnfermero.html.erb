@@ -13,19 +13,8 @@
                    <span style="color: white; margin-right:20px" > ¡Hola, <%= current_user.nombre.capitalize %> <%= current_user.apellido.capitalize %>!</span>
                 </ul>
                 <ul class="navbar-nav">                
-                    <%= link_to "Mis vacunas", vacunas_path, class: 'nav-link' %>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Turnos
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><%= link_to "Mis turnos", turnos_path, class: 'dropdown-item' %></li>
-                            <li><%= link_to "Pedir turno", turnos_pedir_url, class: 'dropdown-item' %></li>
-                        </ul>
-                    </li>
-                </ul>                
+                    <%= link_to "Turnos del dia", turnos_path, class: 'nav-link' %>
+                </ul>               
                 <ul class="navbar-nav ms-auto">                
                     <%= link_to '<i class="bi bi-person-fill"></i>'.html_safe, perfil_path , class: 'nav-link' %>
                 </ul>

@@ -40,12 +40,17 @@ class TurnosController < ApplicationController
     def crear
         @turno = Turno.new(user_id: current_user.id, estado: "previo", vacuna_id: params[:turno][:vacuna_id], fecha: params[:turno][:fecha])
         @turno.enfermedad_id = Vacuna.find(params[:turno][:vacuna_id]).enfermedad_id
-        if @turno.save
-            redirect_to turnos_cargar_url
-            flash[:notice] = "Vacuna ingresada con éxito. Ingrese otra vacuna o presione 'Terminar' para salir."
+        if (@turno.fecha.year > Date.today.year ||(@turno.fecha.month > Date.today.month && @turno.fecha.day > Date.today.day))
+            redirect_to new_turno_url
+            flash[:alert] = "Fecha ingresada no valida. Intente nuevamente"
         else
-            flash[:error] = "Hubo un error al cargar el turno"
-            render :cargar
+            if @turno.save
+                redirect_to turnos_cargar_url
+                flash[:notice] = "Vacuna ingresada con éxito. Ingrese otra vacuna o presione 'Terminar' para salir."
+            else
+                flash[:error] = "Hubo un error al cargar el turno"
+                render :cargar
+            end
         end
     end
   

@@ -1,28 +1,77 @@
-<div class="d-flex flex-column justify-content-center align-items-center" style= " padding-top: 20px;">		
+
+ <div class="d-flex flex-column justify-content-center align-items-center" style= " padding-top: 20px;">		
 	<div class="card text-center mx-auto" style= "width: 90%; ">
 			<div class="card-body">
-				<h1 class="card-title">Turnos</h1>
+				<h1 class="card-title">Turnos para el día: <%= Date.today.strftime('%d/%m/%Y') %></h1>
 				<table class="table table-bordered">
+					<thead>
 					<% if @turnos.size != 0 %>
 						<tr>
-                            <th> Nombre y apellido </th>
-							<th> Enfermedad </th>
-							<th> Estado</th>
-							<th> Opciones</th>
+							<th scope="col">Paciente</th>
+							<th scope="col">Enfermedad</th>
+							<th scope="col">Opciones</th>
 						</tr>
 					<% end %>
-			<% @turnos.each_with_index do |t,index| %>
-				<tr>
-                    <td>  <%=t.user.nombre.capitalize%> <%= t.user.apellido.capitalize%>  </td>
-					<td>  <%=t.enfermedad.nombre.capitalize%> </td> 
-					<td> <%= t.estado %> </td> 
-					<td> </td>
-				</tr>
-			<% end %>
+					</thead>
+			<tbody>
 			<% if @turnos.size == 0 %>
-				<tr> <td colspan="3"> No hay más turnos para el día. </td> </tr>
+					<tr> <td colspan="3"> No hay turnos para el día. </td> </tr>
+			<% else %>
+				<% @turnos.each_with_index do |t,index| %>
+						<tr>
+							<td>  <%= link_to t.user.nombre.capitalize t.user.apellido.capitalize %> </td> 
+							<td>  <%= t.enfermedad.nombre %> </td> 
+							<td> 
+							<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelarModal<%=index.to_s%>">
+							Cancelar turno
+							</button>
+
+							<!-- Modal -->
+							<div class="modal fade" id="cancelarModal<%=index.to_s%>" tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="cancelarModalLabel"> ¿Desea cancelar el turno? </h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											Esta acción solo debe realizarse en caso de que el paciente no haya podido asistir al mismo.
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+											<%= link_to "Confirmar", t, method: :put, class: 'btn btn-danger btn-sm' %>
+										</div>
+									</div>
+								</div>
+							</div>
+						<button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#detalleModal<%=index.to_s%>">
+							Vacuna aplicada
+							</button>
+
+							<!-- Modal -->
+							<div class="modal fade" id="detalleModal<%=index.to_s%>" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="cancelarModalLabel"> Complete la información de la vacuna aplicada: </h5>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<% if t.enfermedad.nombre == "COVID" %>
+
+											<%end%>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Continuar</button>
+								</div>
+							</div>
+							</div>
+							</div>
+						</td>
+						</tr>
+				<% end %>	
 			<% end %>
+			</tbody>
 		</table>
 	</div>
 </div>
-
