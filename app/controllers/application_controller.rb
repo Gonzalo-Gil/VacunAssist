@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
     protected def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:sign_up, keys: [:nombre, :apellido, :dni, :fecha_nacimiento, :telefono, :email, :notificacion, :medio_notificacion])
+        devise_parameter_sanitizer.permit(:account_update, keys: [:nombre, :apellido, :telefono, :email, :notificacion, :medio_notificacion])
     end
 
     def check_tiene_vacuna_covid 

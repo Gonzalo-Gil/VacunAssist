@@ -38,6 +38,7 @@ en:
         dni: "DNI"
         password: "Contraseña"
         password_confirmation: "Confirmación de contraseña"
+        current_password: "Contraseña actual"
     errors:
       models:
         user:
@@ -50,6 +51,8 @@ en:
               too_short:
                 one: muy corta (minimo 1 caracter)
                 other: muy corta (minimo %{count} caracteres)
+            current_password:
+                invalid: "es invalida"
   administrate: 
     actions:
       confirm: ¿Estás seguro?
