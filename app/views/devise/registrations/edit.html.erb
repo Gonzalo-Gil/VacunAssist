@@ -57,7 +57,7 @@
           <p style="color: red">Este campo es obligatorio</p>
         </div>
       </div>
-
+      <% if current_user.role == 0 %>
       <div class="form-group">
         <div class="input-field" style="text-align: left">
           <%= f.check_box :notificacion, class: 'my-checkbox' %>
@@ -71,7 +71,7 @@
           <%= f.select :medio_notificacion, ['','Correo electrónico', 'Mensaje de texto'], {multiple: :true}, { class: 'form-control'} %>
         </div>
       </div>
-
+    <% end %>
     <div class="form-actions">
       <%= f.submit "Guardar", class: 'btn btn-primary' %>
     </div>

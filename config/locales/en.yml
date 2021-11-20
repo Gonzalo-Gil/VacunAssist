@@ -53,6 +53,7 @@ en:
                 other: muy corta (minimo %{count} caracteres)
             current_password:
                 invalid: "es invalida"
+                blank: "es obligatoria para modificar sus datos personales"
   administrate: 
     actions:
       confirm: ¿Estás seguro?
