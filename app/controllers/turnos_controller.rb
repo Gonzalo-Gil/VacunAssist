@@ -7,7 +7,7 @@ class TurnosController < ApplicationController
         when "paciente"
             @turnos=Turno.where(["user_id = ? and estado != ?", current_user.id, 3])
         when "enfermero"
-            @turnos=Turno.where(["fecha = ? and estado != ?", Date.today, 2])
+            @turnos=Turno.where(["fecha = ? and estado = ?", Date.today, 0])
         end
     end
 
@@ -75,6 +75,15 @@ class TurnosController < ApplicationController
     end
   
     def edit
+        @turno = Turno.find(params[:id])
+        if(params[:vacuna][:aplicado]=="true")
+            @turno.estado = "completado"
+            @turno.vacuna = Vacuna.find(params[:vacuna][:laboratorio_id])
+        else
+            @turno.estado="cancelado"
+        end
+        @turno.save
+        redirect_to root_path, notice: "Se guardo el turno"
     end
     
     def destroy
