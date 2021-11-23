@@ -83,15 +83,18 @@
 										</div>
 										<div class="modal-body">
 											Esta acción solo debe realizarse en caso de que el paciente no haya podido asistir al mismo.
-										</div>
+											<%= form_for(t.vacuna, url: edit_turno_path(id: t.id), html: { method: :get }) do |f| %>
+											<%= f.hidden_field 'aplicado', value: "false"%>
+										</div>		
 										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-											<%= link_to "Confirmar", t, method: :put, class: 'btn btn-danger btn-sm' %>
-										</div>
+											<%= f.submit "Cancelar turno", class: "btn btn-danger btn-sm"%>
+											<% end %>
+										</div>		
 									</div>
 								</div>
 							</div>
-						<button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#detalleModal<%=index.to_s%>">
+			
+						<button type="button" class="btn btn-success btn-sm" style="margin-left:1rem;"data-bs-toggle="modal" data-bs-target="#detalleModal<%=index.to_s%>">
 							Vacuna aplicada
 							</button>
 
@@ -108,10 +111,12 @@
 											<%= form_for(t.vacuna, url: edit_turno_path(id: t.id), html: { method: :get }) do |f| %>
 											<%= f.hidden_field 'aplicado', value: "true"%>
 											<%= f.collection_select(:laboratorio_id , Vacuna.where(enfermedad_id: t.enfermedad.id), :id, :nombre,  {class: "form-control" }) %>
-											<%= f.submit "Confirmar"%>
-											<%end%>
+											
 										</div>
-		
+										<div class="modal-footer"> 
+										<%= f.submit "Confirmar", class: "btn btn-outline-success btn-sm"%>
+										<%end%>
+										</div>
 									</div>	
 								</div>
 							</div>
