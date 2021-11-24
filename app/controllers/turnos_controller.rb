@@ -13,10 +13,6 @@ class TurnosController < ApplicationController
         end
     end
 
-    def turnosAnteriores
-        @turnosPrevios=Turno.where(["user_id = ? and estado = ? or estado = ?", params[:id], 2, 3]).order('fecha desc')
-    end
-
     def new
         @enfermedad = Enfermedad.find(params[:id])
         @turno = Turno.new

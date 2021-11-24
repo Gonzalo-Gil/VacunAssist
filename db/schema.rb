@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_175428) do
+ActiveRecord::Schema.define(version: 2021_11_24_180536) do
 
   create_table "enfermedads", force: :cascade do |t|
     t.string "nombre"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "esquemas", force: :cascade do |t|
+    t.integer "cant_dosis"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
