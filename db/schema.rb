@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_175428) do
+ActiveRecord::Schema.define(version: 2021_11_24_223918) do
 
   create_table "enfermedads", force: :cascade do |t|
     t.string "nombre"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "esquemas", force: :cascade do |t|
+    t.integer "cant_dosis"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -59,8 +65,8 @@ ActiveRecord::Schema.define(version: 2021_11_24_175428) do
     t.integer "telefono"
     t.boolean "notificacion"
     t.string "medio_notificacion"
-    t.integer "role", default: 0
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.integer "role"
+    t.index ["email", "dni"], name: "index_users_on_email_and_dni", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
