@@ -26,19 +26,19 @@
 								</a> 
 								<!-- Modal -->
 								<div class="modal fade" id="userModal<%=index.to_s%>" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-dialog modal-dialog-centered modal-lg">
 										<div class="modal-content">
 											<div class="modal-header">
 												<h5 class="modal-title" id="userModalLabel"> Datos del paciente </h5>
 												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 											</div>
-											<div class="modal-body">
-												Nombre: <%= paciente %><br>
-												Fecha de nacimiento: <%= t.user.fecha_nacimiento.strftime('%d/%m/%Y') %><br>
-												Vacunas previas:<br>
+											<div class="modal-body" style="text-align: left;">
+												<b>Nombre:</b> <%= paciente %><br>
+												<b>Fecha de nacimiento:</b> <%= t.user.fecha_nacimiento.strftime('%d/%m/%Y') %><br>
+												<b>Vacunas previas:</b><br>
 												<table class="table table-bordered">
 													<thead>
-														<% if @turnosPrevios.size != 0 %>
+														<% if @turnosPrevios.where(user_id: t.user_id).size != 0 %>
 															<tr>
 																<th scope="col">Enfermedad</th>
 																<th scope="col">Laboratorio</th>
@@ -47,10 +47,10 @@
 														<% end %>
 													</thead>
 													<tbody>
-														<% if @turnosPrevios.size == 0 %>
+														<% if @turnosPrevios.where(user_id: t.user_id).size == 0 %>
 															<tr> <td colspan="3"> No tiene vacunas previas. </td> </tr>
 														<% else %>
-															<% @turnosPrevios.each_with_index do |tp,index| %>
+															<% @turnosPrevios.where(user_id: t.user_id).each_with_index do |tp,index| %>
 																<tr>
 																	<td> <%= tp.enfermedad.nombre %> </td>
 																	<td> <%= tp.vacuna.laboratorio.nombre %> </td>
@@ -83,7 +83,7 @@
 										</div>
 										<div class="modal-body">
 											Esta acción solo debe realizarse en caso de que el paciente no haya podido asistir al mismo.
-											<%= form_for(t.vacuna, url: edit_turno_path(id: t.id), html: { method: :get }) do |f| %>
+											<%= form_for(t, url: edit_turno_path(id: t.id), html: { method: :get }) do |f| %>
 											<%= f.hidden_field 'aplicado', value: "false"%>
 										</div>		
 										<div class="modal-footer">
@@ -108,14 +108,14 @@
 										</div>
 										<div class="modal-body">
 											<h5>Laboratorio: </h5>
-											<%= form_for(t.vacuna, url: edit_turno_path(id: t.id), html: { method: :get }) do |f| %>
+											<%= form_for(t, url: edit_turno_path(id: t.id), html: { method: :get }) do |f| %>
 											<%= f.hidden_field 'aplicado', value: "true"%>
-											<%= f.collection_select(:laboratorio_id , Vacuna.where(enfermedad_id: t.enfermedad.id), :id, :nombre,  {class: "form-control" }) %>
+											<%= collection_select(t.vacuna, :laboratorio_id , Vacuna.where(enfermedad_id: t.enfermedad.id), :id, :nombre, {multiple: :true}, { class: 'form-control'}) %>
 											
 										</div>
 										<div class="modal-footer"> 
-										<%= f.submit "Confirmar", class: "btn btn-outline-success btn-sm"%>
-										<%end%>
+											<%= f.submit "Confirmar", class: "btn btn-outline-success btn-sm"%>
+											<%end%>
 										</div>
 									</div>	
 								</div>

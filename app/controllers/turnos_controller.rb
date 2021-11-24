@@ -8,8 +8,13 @@ class TurnosController < ApplicationController
             @turnos=Turno.where(["user_id = ? and estado != ?", current_user.id, 3])
         when "enfermero"
             @turnos=Turno.where(["fecha = ? and estado = ?", Date.today, 0])
-            @turnosPrevios=Turno.where(["user_id = ? and estado = ?", current_user.id, 3])
+            @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
+            # Solución provisoria: mandar todos los turnos previos y en la vista filtrar segun el paciente elegido
         end
+    end
+
+    def turnosAnteriores
+        @turnosPrevios=Turno.where(["user_id = ? and estado = ? or estado = ?", params[:id], 2, 3]).order('fecha desc')
     end
 
     def new
@@ -77,13 +82,17 @@ class TurnosController < ApplicationController
   
     def edit
         @turno = Turno.find(params[:id])
-        if(params[:vacuna][:aplicado]=="true")
+        if(params[:turno][:aplicado]=="true")
             @turno.estado = "completado"
-            @turno.vacuna = Vacuna.find(params[:vacuna][:laboratorio_id])
+            @turno.vacuna = Vacuna.find(params[:laboratorio_id])
         else
             @turno.estado="cancelado"
         end
         @turno.save
+        if @turno.enfermedad.nombre == "COVID"
+            @turnoAutomatico = Turno.new(user_id: @turno.user_id, estado: "pendiente", sede_id: @turno.sede_id, fecha: (@turno.fecha + 14.days), enfermedad_id: @turno.enfermedad_id)
+            @turnoAutomatico.save
+        end
         redirect_to root_path, notice: "Se guardo el turno"
     end
     
