@@ -111,7 +111,8 @@
 											<%= form_for(t, url: edit_turno_path(id: t.id), html: { method: :get }) do |f| %>
 											<%= f.hidden_field 'aplicado', value: "true"%>
 											<%= collection_select(t.vacuna, :laboratorio_id , Vacuna.where(enfermedad_id: t.enfermedad.id), :id, :nombre, {multiple: :true}, { class: 'form-control'}) %>
-											
+											<h5>Lote: </h5>
+											<%= f.text_field :lote, input_html: { maxlength: 20 }, required: true %>
 										</div>
 										<div class="modal-footer"> 
 											<%= f.submit "Confirmar", class: "btn btn-outline-success btn-sm"%>

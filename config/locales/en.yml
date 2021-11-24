@@ -54,6 +54,10 @@ en:
             current_password:
                 invalid: "es invalida"
                 blank: "es obligatoria para modificar sus datos personales"
+  helpers:
+    submit:
+      create: "Crear %{model}"
+      update: "Actualizar %{model}"
   administrate: 
     actions:
       confirm: ¿Estás seguro?
@@ -62,6 +66,7 @@ en:
       edit_resource: Editar %{name}
       show_resource: Ver %{name}
       new_resource: Nuevo/a %{name}
+      create: Crear %{name}
       back: Atras
     controller:
       create:

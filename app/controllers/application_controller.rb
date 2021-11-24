@@ -8,7 +8,9 @@ class ApplicationController < ActionController::Base
     end
 
     def check_tiene_vacuna_covid 
-        if user_signed_in? and current_user.role==0 
+        puts "Entre al check"
+        if( user_signed_in? && current_user.role == "paciente" )
+            puts "Entre al if"
             @covid19 = Enfermedad.where(nombre: "COVID").first
             tieneVacunaCovid = current_user.turnos.where(["enfermedad_id = ? and estado != ?", @covid19.id, 1]).count
             if tieneVacunaCovid == 0
