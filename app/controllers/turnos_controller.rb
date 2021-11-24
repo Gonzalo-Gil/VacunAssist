@@ -81,6 +81,7 @@ class TurnosController < ApplicationController
         if(params[:turno][:aplicado]=="true")
             @turno.estado = "completado"
             @turno.vacuna = Vacuna.find(params[:laboratorio_id])
+            @turno.lote = params[:turno][:lote]
         else
             @turno.estado="cancelado"
         end
@@ -89,7 +90,7 @@ class TurnosController < ApplicationController
             @turnoAutomatico = Turno.new(user_id: @turno.user_id, estado: "pendiente", sede_id: @turno.sede_id, fecha: (@turno.fecha + 14.days), enfermedad_id: @turno.enfermedad_id)
             @turnoAutomatico.save
         end
-        redirect_to root_path, notice: "Se guardo el turno"
+        redirect_to root_path, notice: "Se actualizó la información del turno"
     end
     
     def destroy
