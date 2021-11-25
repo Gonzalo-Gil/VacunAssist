@@ -1,3 +1,4 @@
 class Esquema < ApplicationRecord
-    has_many :dosis
+    has_many :doses
+    belongs_to :vacuna
 end
