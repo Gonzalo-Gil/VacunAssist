@@ -10,7 +10,7 @@
         <div class="navbar-collapse collapse" id="navbarNav">
             <% if user_signed_in? %>
                 <ul class="navbar-nav">                
-                   <span style="color: white; margin-right:20px" > ¡Hola, <%= current_user.nombre.capitalize %> <%= current_user.apellido.capitalize %>!</span>
+                   <span style="color: white; margin-right:20px" > ¡Hola, <%= current_user.nombre.titleize %> <%= current_user.apellido.capitalize %>!</span>
                 </ul>
                 <ul class="navbar-nav">                
                     <%= link_to "Turnos del dia", turnos_path, class: 'nav-link' %>

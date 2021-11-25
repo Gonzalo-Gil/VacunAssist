@@ -20,7 +20,7 @@
 				<% @turnos.each_with_index do |t,index| %>
 						<tr>
 							<td>
-								<% paciente=t.user.nombre.capitalize+ " " +t.user.apellido.capitalize %>
+								<% paciente=t.user.nombre.titleize+ " " +t.user.apellido.capitalize %>
 								<a class="links" href="#" role="button" data-bs-toggle="modal" data-bs-target="#userModal<%=index.to_s%>">
 									<%= paciente %>
 								</a> 
