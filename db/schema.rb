@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2021_11_24_234524) do
     t.integer "telefono"
     t.boolean "notificacion"
     t.string "medio_notificacion"
-    t.integer "role", default: 0
+    t.integer "role"
     t.index ["email", "dni"], name: "index_users_on_email_and_dni", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

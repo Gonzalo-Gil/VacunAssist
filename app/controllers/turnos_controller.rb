@@ -86,8 +86,11 @@ class TurnosController < ApplicationController
             @turno.estado="cancelado"
         end
         @turno.save
-        if @turno.enfermedad.nombre == "COVID"
-            @turnoAutomatico = Turno.new(user_id: @turno.user_id, estado: "pendiente", sede_id: @turno.sede_id, fecha: (@turno.fecha + 14.days), enfermedad_id: @turno.enfermedad_id)
+        @esquema = Esquema.where(vacuna: @turno.vacuna).first
+        @previos = Turno.where(["user_id = ? and enfermedad_id = ? and estado = ? or estado = ?", @turno.user_id, @turno.enfermedad_id, 2, 3]).count
+        if (@esquema.cant_dosis > 1 && @previos < @esquema.cant_dosis)
+            @dias = @esquema.doses.where(numeroDosis: @previos+1).first.dias
+            @turnoAutomatico = Turno.new(user_id: @turno.user_id, estado: "pendiente", sede_id: @turno.sede_id, fecha: (@turno.fecha + (@dias).days), enfermedad_id: @turno.enfermedad_id)
             @turnoAutomatico.save
         end
         redirect_to root_path, notice: "Se actualizó la información del turno"
