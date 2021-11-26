@@ -10,6 +10,31 @@ class TurnosController < ApplicationController
             @turnos=Turno.where(["fecha = ? and estado = ?", Date.today, 0])
             @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
             # Solución provisoria: mandar todos los turnos previos y en la vista filtrar segun el paciente elegido
+            # if params[:sede_id] == nil
+            #     @turnos=Turno.where(["fecha = ? and estado = ?", Date.today, 0])
+            #     @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
+            #     # Solución provisoria: mandar todos los turnos previos y en la vista filtrar segun el paciente elegido
+            # else
+            #     if params[:apellido] == ""
+            #         @turnos=Turno.where(["fecha = ? and estado = ? and sede_id = ?", Date.today, 0, params[:sede_id]])
+            #         @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
+            #     else
+            #         @pacientes = User.where(["apellido = ?", params[:apellido]])
+            #         @turnos=Turno.joins(:user).where(["fecha = ? and estado = ? and sede_id = ? and apellido LIKE ?", Date.today, 0, params[:sede_id], params[:apellido]])
+            #         @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
+            #     end
+            # end
+        end
+    end
+
+    def filter
+        if params[:apellido] == ""
+            @turnos=Turno.where(["fecha = ? and estado = ? and sede_id = ?", Date.today, 0, params[:sede_id]])
+            @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
+        else
+            @pacientes = User.where(["apellido = ?", params[:apellido]])
+            @turnos=Turno.joins(:user).where(["fecha = ? and estado = ? and sede_id = ? and apellido LIKE ?", Date.today, 0, params[:sede_id], params[:apellido]])
+            @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
         end
     end
 
