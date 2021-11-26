@@ -84,8 +84,8 @@ class TurnosController < ApplicationController
             @turno.lote = params[:turno][:lote]
             @esquema = Esquema.where(vacuna: @turno.vacuna).first
             @previos = Turno.where(["user_id = ? and enfermedad_id = ? and estado = ? or estado = ?", @turno.user_id, @turno.enfermedad_id, 2, 3]).count
-            if (@esquema.cant_dosis > 1 && @previos < @esquema.cant_dosis)
-                @dias = @esquema.doses.where(numeroDosis: @previos+1).first.dias
+            if (@esquema.cant_dosis > 1 && @previos+1 < @esquema.cant_dosis)
+                @dias = @esquema.doses.where(numeroDosis: @previos+2).first.dias
                 @turnoAutomatico = Turno.new(user_id: @turno.user_id, estado: "pendiente", sede_id: @turno.sede_id, fecha: (@turno.fecha + (@dias).days), enfermedad_id: @turno.enfermedad_id)
                 @turnoAutomatico.save
             end

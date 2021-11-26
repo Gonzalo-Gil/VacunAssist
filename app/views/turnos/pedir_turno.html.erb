@@ -20,12 +20,16 @@
                                 </p>
                                 <%= link_to "Solicitar turno", new_turno_url(id: @covid.id), class:"btn btn-outline-success disabled" %>
                             <% else %>
+                            <% if @turnos.where(enfermedad_id: @covid.id).where(estado: :previo).count + @turnos.where(enfermedad_id: @covid.id).where(estado: :completado).count == @turnos.where(enfermedad_id: @covid.id).where("estado = ?  OR estado = ?", 2, 3).first.vacuna.esquema.cant_dosis %>
                                 <p>
                                     <span style="color: red; font-size: 14px;">
                                         Usted no puede solicitar un turno, porque ya se ha aplicado esta vacuna.
                                     </span>
                                 </p>
                                 <%= link_to "Solicitar turno", new_turno_url(id: @covid.id), class:"btn btn-outline-success disabled" %>
+                            <%else%>
+                            <%= link_to "Solicitar turno", new_turno_url(id: @covid.id), class:"btn btn-outline-success" %>
+                            <%end%>
                             <% end %>
                         <% elsif @turnos.where(enfermedad_id: @covid.id).where(estado: :pendiente).count > 0 %>
                             <p>
