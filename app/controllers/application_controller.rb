@@ -8,18 +8,13 @@ class ApplicationController < ActionController::Base
     end
 
     def check_tiene_vacuna_covid 
-        puts "Entre al check"
+        
         if( user_signed_in? && current_user.role == "paciente" )
-            puts "Entre al if"
+            
             @covid19 = Enfermedad.where(nombre: "COVID").first
             tieneVacunaCovid = current_user.turnos.where(["enfermedad_id = ? and estado != ?", @covid19.id, 1]).count
             if tieneVacunaCovid == 0
                 redirect_to new_turno_path(id: @covid19.id), notice: "Por favor solicite turno para COVID-19"
-            elsif tieneVacunaCovid > 0
-                vacuna = current_user.turnos.where(["enfermedad_id = ? and estado != ?", @covid19.id, 1]).first.vacuna
-                if tieneVacunaCovid < vacuna.esquema.cant_dosis 
-                    redirect_to new_turno_path(id: @covid19.id), notice: "Por favor solicite turno para COVID-19"
-                end
             end
         end
     end
