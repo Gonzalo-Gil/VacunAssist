@@ -6,10 +6,10 @@ By default, the navigation contains navigation links
 for all resources in the admin dashboard,
 as defined by the routes in the `admin/` namespace
 %>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <nav class="navigation" role="navigation">
   <%= link_to 'Cerrar sesion', destroy_user_session_path, method: :delete, class: 'button button--alt button--nav' %>
-
+  <h4><span class="badge badge-subtitulos">Información</span></h4>
   <% Administrate::Namespace.new(namespace).resources_with_index_route.each do |resource| %>
     <%= link_to(
       display_resource_name(resource),
@@ -17,4 +17,9 @@ as defined by the routes in the `admin/` namespace
       class: "navigation__link navigation__link--#{nav_link_state(resource)}"
     ) if valid_action?(:index, resource) && show_action?(:index, model_from_resource(resource)) %>
   <% end %>
+  <br>
+  
+  <br>
+  <h4><span class="badge badge-subtitulos">Reportes</span></h4>
+  <%= link_to "Vacunas por rango etario", class: 'navigation__link' %>
 </nav>
