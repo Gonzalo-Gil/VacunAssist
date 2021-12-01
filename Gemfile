@@ -57,3 +57,6 @@ gem 'devise'
 gem 'simple_form'
 
 gem 'administrate'
+gem 'chartkick'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
