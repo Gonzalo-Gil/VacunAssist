@@ -11,9 +11,7 @@ module Admin
 
 
     def authenticate_admin
-      if current_user.admin?
-        flash[:alert] = "Sos admin"
-      else
+      if !current_user.admin?
         redirect_to root_path
       end
     end
