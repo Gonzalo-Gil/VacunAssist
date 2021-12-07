@@ -32,14 +32,12 @@ class SedeDashboard < Administrate::BaseDashboard
     nombre
     calle
     numero
-    turno
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    turno
     nombre
     calle
     numero

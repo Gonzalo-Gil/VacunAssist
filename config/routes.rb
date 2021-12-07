@@ -6,7 +6,8 @@ Rails.application.routes.draw do
       resources :sedes
       resources :turnos
       resources :vacunas
-      
+      resources :esquemas
+      resources :doses
       root to: "users#index"
     end
     resources :reportes

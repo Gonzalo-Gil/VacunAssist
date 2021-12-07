@@ -40,12 +40,17 @@ en:
       enfermedad:
         one: Enfermedad
         other: Enfermedades
+      dose:
+        one: Dosis
+        other: Dosis
     attributes:
       user:
         dni: "DNI"
         password: "Contraseña"
         password_confirmation: "Confirmación de contraseña"
         current_password: "Contraseña actual"
+      esquema:
+        numeroDosis: "Numero de dosis"
     errors:
       models:
         user:
