@@ -7,23 +7,30 @@ class TurnosController < ApplicationController
         when "paciente"
             @turnos=Turno.where(["user_id = ? and estado != ?", current_user.id, 3])
         when "enfermero"
-            @turnos=Turno.where(["fecha = ? and estado = ?", Date.today, 0])
-            @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
-            # Solución provisoria: mandar todos los turnos previos y en la vista filtrar segun el paciente elegido
-            # if params[:sede_id] == nil
-            #     @turnos=Turno.where(["fecha = ? and estado = ?", Date.today, 0])
-            #     @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
-            #     # Solución provisoria: mandar todos los turnos previos y en la vista filtrar segun el paciente elegido
-            # else
-            #     if params[:apellido] == ""
-            #         @turnos=Turno.where(["fecha = ? and estado = ? and sede_id = ?", Date.today, 0, params[:sede_id]])
-            #         @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
-            #     else
-            #         @pacientes = User.where(["apellido = ?", params[:apellido]])
-            #         @turnos=Turno.joins(:user).where(["fecha = ? and estado = ? and sede_id = ? and apellido LIKE ?", Date.today, 0, params[:sede_id], params[:apellido]])
-            #         @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
-            #     end
-            # end
+            if params[:sede_id]
+                if params[:sede_id] != ""
+                    if params[:apellido] == ""
+                        @turnos=Turno.where(["fecha = ? and estado = ? and sede_id = ?", Date.today, 0, params[:sede_id]])
+                        @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
+                    else
+                        @pacientes = User.where(["apellido = ?", params[:apellido]])
+                        @turnos=Turno.joins(:user).where(["fecha = ? and estado = ? and sede_id = ? and apellido LIKE ?", Date.today, 0, params[:sede_id], params[:apellido]])
+                        @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
+                    end
+                else
+                    if params[:apellido] == ""
+                        @turnos=Turno.where(["fecha = ? and estado = ?", Date.today, 0])
+                        @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
+                    else
+                        @pacientes = User.where(["apellido = ?", params[:apellido]])
+                        @turnos=Turno.joins(:user).where(["fecha = ? and estado = ? and apellido LIKE ?", Date.today, 0, params[:apellido]])
+                        @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
+                    end
+                end
+            else
+                @turnos=Turno.where(["fecha = ? and estado = ?", Date.today, 0])
+                @turnosPrevios=Turno.where(["estado = ? or estado = ?", 2, 3]).order('fecha desc')
+            end
         end
     end
 

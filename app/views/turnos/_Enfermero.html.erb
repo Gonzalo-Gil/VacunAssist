@@ -4,10 +4,10 @@
 			<div class="card-body">
 				<h1 class="card-title">Turnos para el día: <%= Date.today.strftime('%d/%m/%Y') %></h1>
 				
-				<%= form_with url: turnos_filtrar_path, html: { method: :post } do |f| %>
+				<%= form_with url: turnos_url, html: { method: :get } do |f| %>
 					<div class="row" style="text-align:left; margin: 5px 0px 5px 0px">
 						<div class="col-md-2" style="padding-left: 0px">
-							<%= f.select :sede_id, options_for_select(Sede.all.pluck(:nombre, :id)), {multiple: :true}, { class: 'form-control'} %>
+							<%= f.select :sede_id, options_for_select(Sede.all.pluck(:nombre, :id)), { include_blank: 'Todas las sedes' }, { class: 'form-control'} %>
 						</div>
 						<div class="col-md-2" style="padding-left: 0px">
 							<%= f.text_field :apellido, input_html: { maxlength: 20 }, class:"form-control", placeholder:"Buscar por apellido" %>

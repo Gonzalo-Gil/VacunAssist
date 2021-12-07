@@ -33,6 +33,13 @@ en:
   hello: "Hello world"
   
   activerecord:
+    models:
+      user:
+        one: Usuario
+        other: Usuarios
+      enfermedad:
+        one: Enfermedad
+        other: Enfermedades
     attributes:
       user:
         dni: "DNI"
