@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'turnos/pedir', to: 'turnos#pedir_turno', as: :turnos_pedir
   get 'turnos/fantasma', to: 'turnos#fantasma', as: :turnos_fantasma
   get 'notificaciones/enviar', to: 'notificaciones#enviarNotificaciones', as: :notificaciones_enviar
+  get 'comprobante/enviar', to: 'notificaciones#comprobanteTurno', as: :comprobante_enviar
   resources :turnos
   resources :vacunas
   post 'turnos/filtrar', to: 'turnos#filter', as: :turnos_filtrar

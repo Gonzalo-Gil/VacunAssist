@@ -132,6 +132,6 @@ class TurnosController < ApplicationController
     end
 
     def fantasma
-        redirect_to turnos_path
+        redirect_to comprobante_enviar_path
     end
   end

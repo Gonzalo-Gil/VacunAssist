@@ -8,4 +8,12 @@ class NotificacionesController < ApplicationController
         end
         redirect_to root_path
     end
+
+    def comprobanteTurno
+        @usuario = User.where(["id = ?", current_user.id]).first
+        if @usuario.notificacion and @usuario.medio_notificacion == 'Correo electrónico'
+            UserMailer.with(user: @usuario).comprobante.deliver_now
+        end
+        redirect_to turnos_path
+    end    
 end

@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2>¡Hola, <%= @user.nombre %>!</h2>
+    <p>
+      Solicitaste turno para: <%=@ultimoTurno.enfermedad.nombre%>, para el día <%=@ultimoTurno.fecha.strftime('%d/%m/%Y')%>, en: <%=@ultimoTurno.sede.nombre%>. <br>
+    </p>
+    <p>
+      Recordá que si no podes asistir al turno, siempre podes cancelarlo desde nuestra página para solicitar otro turno.
+    </p>
+    <p>¡Saludos! <br>
+    Equipo de VacunAssist.</p>
+  </body>
+</html>
