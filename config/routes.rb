@@ -24,5 +24,6 @@ Rails.application.routes.draw do
   root 'pages#home'
   
   get '/perfil', to: 'users#show'
-  
+  get '/reportes/index', to: 'reportes#index'
+  get '/reportes/create', to: 'reportes#create'
 end

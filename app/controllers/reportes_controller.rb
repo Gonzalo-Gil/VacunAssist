@@ -7,6 +7,6 @@ class ReportesController < ApplicationController
     end
     def create
         @turnos = Turno.where(['estado = ? AND fecha <= ? AND fecha >= ?', "completado", params[:fechaHasta], params[:fechaDesde]])
-        
     end
+    
 end

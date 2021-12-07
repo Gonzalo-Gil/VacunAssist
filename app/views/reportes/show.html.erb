@@ -1,27 +1,6 @@
-<%#
-# Navigation
-
-This partial is used to display the navigation in Administrate.
-By default, the navigation contains navigation links
-for all resources in the admin dashboard,
-as defined by the routes in the `admin/` namespace
-%>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<nav class="navigation" role="navigation">
-  <%= link_to 'Cerrar sesion', destroy_user_session_path, method: :delete, class: 'button button--alt button--nav' %>
-  <h4><span class="badge badge-subtitulos">Información</span></h4>
-  <% Administrate::Namespace.new(namespace).resources_with_index_route.each do |resource| %>
-    <%= link_to(
-      display_resource_name(resource),
-      resource_index_route(resource),
-      class: "navigation__link navigation__link--#{nav_link_state(resource)}"
-    ) if valid_action?(:index, resource) && show_action?(:index, model_from_resource(resource)) %>
-  <% end %>
-  <br>
-  
-  <br>
-  
-  <%= link_to 'Reportes', reportes_path, class: 'btn', style: 'background: #96ce7a; color: white'%>
+  <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Reportes
+</button>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -49,12 +28,5 @@ as defined by the routes in the `admin/` namespace
           </div>
       <%end%>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn" style= "background: #96ce7a; color: white">Generar reporte</button>
-      </div>
-    </div>
   </div>
 </div>
-
-</nav>

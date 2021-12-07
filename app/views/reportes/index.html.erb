@@ -6,25 +6,25 @@
             </div>
             <div class="card-body" >
                 <h5 class="card-title">Seleccione las fechas de interés para generar el reporte: </h5>
-                <%= form_tag '/reportes' %>
+                <%= form_for :reporte, url: '/reportes/create' do |f| %>
                     <div class="form-group text-center" style="margin-bottom: 10px">
                         <div class="col-md-4">
-                            <%= label_tag :desde, 'Desde: ' %>
-                            <%= date_field_tag :fechaDesde, class: 'form-control', max: Date.yesterday, required: true %>
+                            <%= f.label :desde, 'Desde: ' %>
+                            <%= f.date_field :fechaDesde, class: 'form-control', max: Date.yesterday, required: true %>
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom: 10px">
                         <div class="col-md-4">
-                            <%= label_tag :hasta, 'Hasta: ' %>
-                            <%= date_field_tag :fechaHasta, class: 'form-control', max: Date.today, required: true %>
+                            <%= f.label :hasta, 'Hasta: ' %>
+                            <%= f.date_field :fechaHasta, class: 'form-control', max: Date.today, required: true %>
                         </div>
                     </div>
                     <div class="card-body">
                     <div class="actions" style="margin-bottom: 10px">
-                        <%= submit_tag "Generar reportes", class: 'btn', style: "background: #96ce7a; color: white" %>
+                        <%= f.submit "Generar reportes", class: 'btn', style: "background: #96ce7a; color: white" %>
                     </div>
                     </div>
-                <% end %>
+                <%end%>
             </div>
             <div class="card-footer" style="background: #96ce7a; color: white">
                 VacunAssist
