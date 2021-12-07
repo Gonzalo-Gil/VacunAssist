@@ -7,10 +7,18 @@
 				<%= form_with url: turnos_url, html: { method: :get } do |f| %>
 					<div class="row" style="text-align:left; margin: 5px 0px 5px 0px">
 						<div class="col-md-2" style="padding-left: 0px">
-							<%= f.select :sede_id, options_for_select(Sede.all.pluck(:nombre, :id)), { include_blank: 'Todas las sedes' }, { class: 'form-control'} %>
+							<% if params[:sede_id] %>
+								<%= f.select :sede_id, options_for_select(Sede.all.pluck(:nombre, :id), selected: params[:sede_id]), { include_blank: 'Todas las sedes' }, { class: 'form-control'} %>
+							<% else %>
+								<%= f.select :sede_id, options_for_select(Sede.all.pluck(:nombre, :id)), { include_blank: 'Todas las sedes' }, { class: 'form-control'} %>
+							<% end %>
 						</div>
 						<div class="col-md-2" style="padding-left: 0px">
-							<%= f.text_field :apellido, input_html: { maxlength: 20 }, class:"form-control", placeholder:"Buscar por apellido" %>
+							<% if params[:apellido] != "" %>
+								<%= f.text_field :apellido, input_html: { maxlength: 20 }, class:"form-control", placeholder:"Buscar por apellido", value: params[:apellido] %>
+							<% else %>
+								<%= f.text_field :apellido, input_html: { maxlength: 20 }, class:"form-control", placeholder:"Buscar por apellido" %>
+							<% end %>
 						</div>
 						<div class="col-md-2" style="padding-left: 0px;">
 							<%= f.submit "Buscar", class: "btn btn-primary"%>
