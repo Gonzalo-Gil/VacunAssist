@@ -6,7 +6,7 @@
             </div>
             <div class="card-body" >
                 <h5 class="card-title">Seleccione las fechas de interés para generar el reporte: </h5>
-                <%= form_for :reporte, url: '/reportes/create' do |f| %>
+                <%= form_for :reporte, url: reportes_path do |f| %>
                     <div class="form-group text-center" style="margin-bottom: 10px">
                         <div class="col-md-4">
                             <%= f.label :desde, 'Desde: ' %>
