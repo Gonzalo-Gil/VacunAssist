@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2>¡Hola, <%= @user.nombre %>!</h2>
+    <p>
+      Te recordamos que el día de hoy tienes un turno pendiente para vacunarte contra: <%=@turnoHoy.enfermedad.nombre%>. Te estaremos esperando en la sede <%=@turnoHoy.sede.nombre%>. <br>
+    </p>
+    <p>
+      Recuerda que si no puedes asistir al turno, siempre puedes cancelarlo desde nuestra página para solicitar otro turno.
+    </p>
+    <p>¡Saludos! <br>
+    Equipo de VacunAssist.</p>
+  </body>
+</html>
