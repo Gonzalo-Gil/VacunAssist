@@ -71,8 +71,9 @@
                     </div>
                     <div class="col-md-8">
                     <%= pie_chart @turnos.group('estado').count %> 
-                    <%= line_chart @turnos.group('estado').group_by_day(:fecha).count %>
                     </div>
+                    <h5>Estado de turnos en las fechas seleccionadas: </h5>
+                    <%= line_chart @turnos.group('estado').group_by_day(:fecha).count, xtitle: "Fecha", ytitle: "Turnos" %>
                 </div>
                 </div>
             </div>
