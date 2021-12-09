@@ -51,6 +51,14 @@
                         </ul>
                         </div>
                         <div class="col-md-8"><%= pie_chart @turnosCompletados.joins(:enfermedad).group('nombre').count %></div>
+                        <div class="row">
+                        <div>
+                            <h5>Turnos completados por enfermedad en las fechas seleccionadas: </h5>
+                            <%= line_chart @enfermedades.map { |e|
+                                {name: e.nombre, data: @turnosCompletados.where(['estado = ? AND enfermedad_id = ?', 2, e.id]).group_by_day(:fecha).count}
+                            }, ytitle: "Turnos" %>
+                        </div>
+                    </div>
                     </div>
                     </div>
                 </div> 
@@ -75,6 +83,16 @@
                     <h5>Estado de turnos en las fechas seleccionadas: </h5>
                     <%= line_chart @turnos.group('estado').group_by_day(:fecha).count, xtitle: "Fecha", ytitle: "Turnos" %>
                 </div>
+                <% if @sedes.count > 1 %>
+                    <div class="row">
+                        <div>
+                            <h5>Turnos completados por sede: </h5>
+                            <%= line_chart @sedes.map { |sede|
+                                {name: sede.nombre, data: sede.turno.where(['estado = ?', 2]).group_by_day(:fecha).count}
+                            }, ytitle: "Turnos" %>
+                        </div>
+                    </div>
+                <% end %>
                 </div>
             </div>
     </div>

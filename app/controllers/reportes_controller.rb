@@ -11,6 +11,7 @@ class ReportesController < ApplicationController
         @users = User.all;
         @enfermedades = Enfermedad.all
         @laboratorios = Laboratorio.all
+        @sedes = Sede.all
         if params[:reporte][:fechaDesde] == "" or params[:reporte][:fechaHasta] == ""
             @turnosCompletados = Turno.where(['estado = ?', 2])
             @turnosPerdidos = Turno.where(['estado = ?', 1])
@@ -24,6 +25,7 @@ class ReportesController < ApplicationController
             @turnosCompletados=@turnosCompletados.where(sede_id: params[:reporte][:sede_id])
             @turnosPerdidos = @turnosPerdidos.where(sede_id: params[:reporte][:sede_id])
             @turnos = @turnos.where(sede_id: params[:reporte][:sede_id])
+            @sedes = @sedes.where(id: params[:reporte][:sede_id])
         end
     end
 end
