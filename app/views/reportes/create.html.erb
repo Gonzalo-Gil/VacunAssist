@@ -88,7 +88,7 @@
                         <div>
                             <h5>Turnos completados por sede: </h5>
                             <%= line_chart @sedes.map { |sede|
-                                {name: sede.nombre, data: sede.turno.where(['estado = ?', 2]).group_by_day(:fecha).count}
+                                {name: sede.nombre, data: @turnosCompletados.where(['sede_id = ?', sede.id]).group_by_day(:fecha).count}
                             }, ytitle: "Turnos" %>
                         </div>
                     </div>

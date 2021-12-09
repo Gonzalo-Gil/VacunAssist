@@ -6,6 +6,10 @@ class ReportesController < ApplicationController
         end
     end
     def create
+        if (params[:reporte][:fechaDesde] > params[:reporte][:fechaHasta])
+            redirect_to reportes_path
+            flash[:alert] = "Fechas invalidas, intente nuevamente"
+        end
         @enfermeros = User.where(role: "enfermero");
         @pacientes = User.where(role: "paciente");
         @users = User.all;
