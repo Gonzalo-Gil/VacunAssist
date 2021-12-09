@@ -1,4 +1,10 @@
 <body style="background: url(https://www.teahub.io/photos/full/40-402760_light-color-background-for-website.jpg) center / cover no-repeat;">
+<div class="card text-center shadow p-1 mb-5"  style="margin-top: 40px;  background: #96ce7a; color: white; heigth: auto">
+        <%= link_to root_path, class: 'navbar-brand' do %> 
+            <%= image_tag "logo4.PNG", title: "Logo", class: "logo", width: "50", heigth: "50" %>
+        <% end %>
+</div>
+
 <div class= "container">
         <div class="card shadow p-5 m-5">
             <div class="card-header" style=" background: #96ce7a; color: white"><h3>Información general: </h3></div>
@@ -9,13 +15,19 @@
                         <li class="list-group-item">Cantidad total de enfermeros: <%= @enfermeros.count %></li>
                         <li class="list-group-item">Cantidad total de pacientes/usuarios: <%= @pacientes.count %></li>
                         <li class="list-group-item">Cantidad de enfermedades tratables: <%= @enfermedades.count %></li>
-                        <li>Sus nombres: <% @enfermedades.each do |enfermedad| %>
-                        <li><%= enfermedad.nombre %></li>
-                        <%end%>
+                        <li class="list-group-item">Sus nombres: 
+                            <ul>
+                                <% @enfermedades.each do |enfermedad| %>
+                                <li><%= enfermedad.nombre %></li>
+                                <%end%>
+                            </ul>
                         </li>
-                        <li class="list-group-item" >Laboratorios con los que se trabaja: <% @laboratorios.each do |lab| %>
-                        <li><%= lab.nombre %></li>
-                        <%end%>
+                        <li class="list-group-item" >Laboratorios con los que se trabaja: 
+                            <ul>
+                                <% @laboratorios.each do |lab| %>
+                                <li><%= lab.nombre %></li>
+                                <%end%>
+                            </ul>
                         </li>
                     <ul>
                 </div>
@@ -24,7 +36,7 @@
             </div>
             </div>
         </div>
-        
+
         <div class="card shadow p-5 m-5">
             <div class="card-header" style=" background: #96ce7a; color: white"><h3>Vacunas aplicadas por enfermedad/virus: </h3></div>               
                 <div class="card">
@@ -57,7 +69,10 @@
                             <%= @turnosCompletados.count %></li>
                         </ul>
                     </div>
-                    <div class="col-md-8"><%= pie_chart @turnos.group('estado').count %> </div>
+                    <div class="col-md-8">
+                    <%= pie_chart @turnos.group('estado').count %> 
+                    <%= line_chart @turnos.group('estado').group_by_day(:fecha).count %>
+                    </div>
                 </div>
                 </div>
             </div>

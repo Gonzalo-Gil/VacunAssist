@@ -8,7 +8,7 @@ class ReportesController < ApplicationController
     def create
         @turnosCompletados = Turno.where(['estado = ? AND fecha <= ? AND fecha >= ?', 2, Date.parse(params[:reporte][:fechaHasta]), Date.parse(params[:reporte][:fechaDesde])])
         @turnosPerdidos = Turno.where(['estado = ? AND fecha <= ? AND fecha >= ?', 1, Date.parse(params[:reporte][:fechaHasta]), Date.parse(params[:reporte][:fechaDesde])])
-        @turnos = Turno.where(['fecha <= ? AND fecha >= ?', Date.parse(params[:reporte][:fechaHasta]), Date.parse(params[:reporte][:fechaDesde])])
+        @turnos = Turno.where(['estado != ? AND fecha <= ? AND fecha >= ?', 0, Date.parse(params[:reporte][:fechaHasta]), Date.parse(params[:reporte][:fechaDesde])])
         @enfermeros = User.where(role: "enfermero");
         @pacientes = User.where(role: "paciente");
         @users = User.all;
