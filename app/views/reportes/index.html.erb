@@ -1,13 +1,20 @@
-<div class="container">
-    <div class="row">
-        <div class="card text-center">
+<body style="background: url(https://www.teahub.io/photos/full/40-402760_light-color-background-for-website.jpg) center / cover no-repeat;">
+<div class="row">
+    <div class="col-md-2" style="background: transparent"></div>
+    <div class="col-md-8" style="background: transparent">
+    <div class="card text-center shadow p-1 mb-5"  style="margin-top: 40px;  background: #96ce7a; color: white; heigth: auto">
+        <%= link_to root_path, class: 'navbar-brand' do %> 
+            <%= image_tag "logo4.PNG", title: "Logo", class: "logo", width: "50", heigth: "50" %>
+        <% end %>
+    </div>
+        <div class="card text-center shadow p-3 mb-5" style="">
             <div class="card-header" style=" background: #96ce7a; color: white">
-                Reportes
+               <h5> Reportes</h5>
             </div>
             <div class="card-body" >
-                <h5 class="card-title">Seleccione las fechas de interés para generar el reporte: </h5>
+                <h5 class="card-title">Seleccione las fechas de interés para generar los reportes: </h5>
                 <%= form_for :reporte, url: reportes_path do |f| %>
-                    <div class="form-group text-center" style="margin-bottom: 10px">
+                    <div class="form-group text-center " style="margin-bottom: 10px">
                         <div class="col-md-4">
                             <%= f.label :desde, 'Desde: ' %>
                             <%= f.date_field :fechaDesde, class: 'form-control', max: Date.yesterday, required: true %>
@@ -31,4 +38,6 @@
             </div>
         </div>
     </div>
+    <div class="col-md-2" style="background: transparent"></div>
 </div>
+</body>

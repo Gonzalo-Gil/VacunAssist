@@ -1,3 +1,67 @@
-<h1>hola</h1>
-<%= @turnos.all %>
-<%= pie_chart @turnos.group(:enfermedad).count %>
+<body style="background: url(https://www.teahub.io/photos/full/40-402760_light-color-background-for-website.jpg) center / cover no-repeat;">
+<div class= "container">
+        <div class="card shadow p-5 m-5">
+            <div class="card-header" style=" background: #96ce7a; color: white"><h3>Información general: </h3></div>
+            <div class="card-body">
+                <div class="row">
+                <div class="col-md-4">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Cantidad total de enfermeros: <%= @enfermeros.count %></li>
+                        <li class="list-group-item">Cantidad total de pacientes/usuarios: <%= @pacientes.count %></li>
+                        <li class="list-group-item">Cantidad de enfermedades tratables: <%= @enfermedades.count %></li>
+                        <li>Sus nombres: <% @enfermedades.each do |enfermedad| %>
+                        <li><%= enfermedad.nombre %></li>
+                        <%end%>
+                        </li>
+                        <li class="list-group-item" >Laboratorios con los que se trabaja: <% @laboratorios.each do |lab| %>
+                        <li><%= lab.nombre %></li>
+                        <%end%>
+                        </li>
+                    <ul>
+                </div>
+                <div class="col-md-8"><%= pie_chart @users.group('role').count %></div>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="card shadow p-5 m-5">
+            <div class="card-header" style=" background: #96ce7a; color: white"><h3>Vacunas aplicadas por enfermedad/virus: </h3></div>               
+                <div class="card">
+                    <div class="card-header">Enfermedades contra las que se vacunaron:</div>
+                    <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                        <ul class="list-group list-group-flush">
+                            <%@turnosCompletados.joins(:enfermedad).group('nombre').each do |t| %>
+                            <li class="list-group-item"><%= t.enfermedad.nombre %></li>
+                            <%end%>
+                        </ul>
+                        </div>
+                        <div class="col-md-8"><%= pie_chart @turnosCompletados.joins(:enfermedad).group('nombre').count %></div>
+                    </div>
+                    </div>
+                </div> 
+        </div>           
+
+    <div class="card shadow p-5 m-5">
+        <div class="card-header" style=" background: #96ce7a; color: white"><h3>Turnos: </h3></div>      
+            <div class="card">
+                <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Cantidad de turnos cancelados dentro de las fechas seleccionadas:
+                            <%= @turnosPerdidos.count %></li>
+                            <li class="list-group-item">Cantidad de turnos aplicados dentro de las fechas seleccionadas:
+                            <%= @turnosCompletados.count %></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-8"><%= pie_chart @turnos.group('estado').count %> </div>
+                </div>
+                </div>
+            </div>
+    </div>
+</div>
+</body>
+
