@@ -17,13 +17,20 @@
                     <div class="form-group text-center " style="margin-bottom: 10px">
                         <div class="col-md-4">
                             <%= f.label :desde, 'Desde: ' %>
-                            <%= f.date_field :fechaDesde, class: 'form-control', max: Date.yesterday, required: true %>
+                            <%= f.date_field :fechaDesde, class: 'form-control', max: Date.yesterday %>
                         </div>
                     </div>
                     <div class="form-group" style="margin-bottom: 10px">
                         <div class="col-md-4">
                             <%= f.label :hasta, 'Hasta: ' %>
-                            <%= f.date_field :fechaHasta, class: 'form-control', max: Date.today, required: true %>
+                            <%= f.date_field :fechaHasta, class: 'form-control', max: Date.today %>
+                            <p style="text-aling: left">Si desea ver todos los datos, deje una o ambas fechas vacías </p>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px">
+                        <div class="col-md-4">
+                            <%= f.label :Sedes, 'Sedes: ' %>
+                            <%= f.select :sede_id, options_for_select(Sede.all.pluck(:nombre, :id)), { include_blank: 'Todas las sedes' }, { class: 'form-control'} %>
                         </div>
                     </div>
                     <div class="card-body">

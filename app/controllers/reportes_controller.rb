@@ -6,14 +6,24 @@ class ReportesController < ApplicationController
         end
     end
     def create
-        @turnosCompletados = Turno.where(['estado = ? AND fecha <= ? AND fecha >= ?', 2, Date.parse(params[:reporte][:fechaHasta]), Date.parse(params[:reporte][:fechaDesde])])
-        @turnosPerdidos = Turno.where(['estado = ? AND fecha <= ? AND fecha >= ?', 1, Date.parse(params[:reporte][:fechaHasta]), Date.parse(params[:reporte][:fechaDesde])])
-        @turnos = Turno.where(['estado != ? AND fecha <= ? AND fecha >= ?', 3, Date.parse(params[:reporte][:fechaHasta]), Date.parse(params[:reporte][:fechaDesde])])
         @enfermeros = User.where(role: "enfermero");
         @pacientes = User.where(role: "paciente");
         @users = User.all;
         @enfermedades = Enfermedad.all
         @laboratorios = Laboratorio.all
+        if params[:reporte][:fechaDesde] == "" or params[:reporte][:fechaHasta] == ""
+            @turnosCompletados = Turno.where(['estado = ?', 2])
+            @turnosPerdidos = Turno.where(['estado = ?', 1])
+            @turnos = Turno.where(['estado != ?', 3])           
+        else
+            @turnosCompletados = Turno.where(['estado = ? AND fecha <= ? AND fecha >= ?', 2, Date.parse(params[:reporte][:fechaHasta]), Date.parse(params[:reporte][:fechaDesde])])
+            @turnosPerdidos = Turno.where(['estado = ? AND fecha <= ? AND fecha >= ?', 1, Date.parse(params[:reporte][:fechaHasta]), Date.parse(params[:reporte][:fechaDesde])])
+            @turnos = Turno.where(['estado != ? AND fecha <= ? AND fecha >= ?', 3, Date.parse(params[:reporte][:fechaHasta]), Date.parse(params[:reporte][:fechaDesde])]) 
+        end
+        if params[:reporte][:sede_id] != ""
+            @turnosCompletados=@turnosCompletados.where(sede_id: params[:reporte][:sede_id])
+            @turnosPerdidos = @turnosPerdidos.where(sede_id: params[:reporte][:sede_id])
+            @turnos = @turnos.where(sede_id: params[:reporte][:sede_id])
+        end
     end
-    
 end
