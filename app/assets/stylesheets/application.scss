@@ -38,6 +38,11 @@ a.links:hover {
     text-decoration: underline #0000EE;
 }
 
+.borde{
+    order: 1px solid lightgray;
+    box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.3);
+}
+
 .my-form{
     text-align: center;
     background-color: white;

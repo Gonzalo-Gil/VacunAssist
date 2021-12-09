@@ -1,157 +1,157 @@
-
- <div class="d-flex flex-column justify-content-center align-items-center" style= " padding-top: 20px;">		
-	<div class="card text-center mx-auto" style= "width: 90%; ">
+<div class="d-flex flex-column justify-content-center align-items-center" style= "padding-top: 20px; ">		
+	<div class="card text-center mx-auto" style= "width: 90%; background-color:white">
 			<div class="card-body">
 				<h1 class="card-title">Turnos para el día: <%= Date.today.strftime('%d/%m/%Y') %></h1>
 				
-				<%= form_with url: turnos_url, html: { method: :get } do |f| %>
-					<div class="row" style="text-align:left; margin: 5px 0px 5px 0px">
-						<div class="col-md-2" style="padding-left: 0px">
+				<%= form_with url: turnos_url, class:"row gy-2 gx-3 align-items-center", html: { method: :get } do |f| %>
+						<div class="col-auto">
 							<% if params[:sede_id] %>
 								<%= f.select :sede_id, options_for_select(Sede.all.pluck(:nombre, :id), selected: params[:sede_id]), { include_blank: 'Todas las sedes' }, { class: 'form-control'} %>
 							<% else %>
 								<%= f.select :sede_id, options_for_select(Sede.all.pluck(:nombre, :id)), { include_blank: 'Todas las sedes' }, { class: 'form-control'} %>
 							<% end %>
 						</div>
-						<div class="col-md-2" style="padding-left: 0px">
+						<div class="col-auto">
 							<% if params[:apellido] != "" %>
 								<%= f.text_field :apellido, input_html: { maxlength: 20 }, class:"form-control", placeholder:"Buscar por apellido", value: params[:apellido] %>
 							<% else %>
 								<%= f.text_field :apellido, input_html: { maxlength: 20 }, class:"form-control", placeholder:"Buscar por apellido" %>
 							<% end %>
 						</div>
-						<div class="col-md-2" style="padding-left: 0px;">
+						<div class="col-auto">
 							<%= f.submit "Buscar", class: "btn btn-primary"%>
 							<%= link_to "Limpiar filtros", root_path, class: "btn btn-danger" %>
 						</div>
-					</div>
 				<%end%>
 				
-				<table class="table table-bordered">					
+				<table class="table table-bordered" style= "margin-top: 10px;">					
 					<thead>
-					<% if @turnos.size != 0 %>
-						<tr>
-							<th scope="col">Paciente</th>
-							<th scope="col">Enfermedad</th>
-							<th scope="col">Opciones</th>
-						</tr>
-					<% end %>
+						<% if @turnos.size != 0 %>
+							<tr>
+								<th scope="col">Paciente</th>
+								<th scope="col">Enfermedad</th>
+								<th scope="col">Opciones</th>
+							</tr>
+						<% end %>
 					</thead>
-			<tbody>
-			<% if @turnos.size == 0 %>
-					<tr> <td colspan="3"> No hay turnos para el día. </td> </tr>
-			<% else %>
-				<% @turnos.each_with_index do |t,index| %>
-						<tr>
-							<td>
-								<% paciente=t.user.nombre.titleize+ " " +t.user.apellido.capitalize %>
-								<a class="links" href="#" role="button" data-bs-toggle="modal" data-bs-target="#userModal<%=index.to_s%>">
-									<%= paciente %>
-								</a> 
-								<!-- Modal -->
-								<div class="modal fade" id="userModal<%=index.to_s%>" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered modal-lg">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="userModalLabel"> Datos del paciente </h5>
-												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div class="modal-body" style="text-align: left;">
-												<b>Nombre:</b> <%= paciente %><br>
-												<b>Fecha de nacimiento:</b> <%= t.user.fecha_nacimiento.strftime('%d/%m/%Y') %><br>
-												<b>Vacunas previas:</b><br>
-												<table class="table table-bordered">
-													<thead>
-														<% if @turnosPrevios.where(user_id: t.user_id).size != 0 %>
-															<tr>
-																<th scope="col">Enfermedad</th>
-																<th scope="col">Laboratorio</th>
-																<th scope="col">Fecha de aplicación</th>
-															</tr>
-														<% end %>
-													</thead>
-													<tbody>
-														<% if @turnosPrevios.where(user_id: t.user_id).size == 0 %>
-															<tr> <td colspan="3"> No tiene vacunas previas. </td> </tr>
-														<% else %>
-															<% @turnosPrevios.where(user_id: t.user_id).each_with_index do |tp,index| %>
+					<tbody>
+					<% if @turnos.size == 0 %>
+							<tr> <td colspan="3"> No hay turnos para el día. </td> </tr>
+					<% else %>
+						<% @turnos.each_with_index do |t,index| %>
+							<tr>
+								<td>
+									<% paciente=t.user.nombre.titleize+ " " +t.user.apellido.capitalize %>
+									<a class="links" href="#" role="button" data-bs-toggle="modal" data-bs-target="#userModal<%=index.to_s%>">
+										<%= paciente %>
+									</a> 
+									<!-- Modal -->
+									<div class="modal fade" id="userModal<%=index.to_s%>" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered modal-lg">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="userModalLabel"> Datos del paciente </h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body" style="text-align: left;">
+													<b>Nombre:</b> <%= paciente %><br>
+													<b>Fecha de nacimiento:</b> <%= t.user.fecha_nacimiento.strftime('%d/%m/%Y') %><br>
+													<b>Vacunas previas:</b><br>
+													<table class="table table-bordered">
+														<thead>
+															<% if @turnosPrevios.where(user_id: t.user_id).size != 0 %>
 																<tr>
-																	<td> <%= tp.enfermedad.nombre %> </td>
-																	<td> <%= tp.vacuna.laboratorio.nombre %> </td>
-																	<td> <%= tp.fecha.strftime('%d/%m/%Y') %> </td>
+																	<th scope="col">Enfermedad</th>
+																	<th scope="col">Laboratorio</th>
+																	<th scope="col">Fecha de aplicación</th>
 																</tr>
 															<% end %>
-														<% end %>
-													</tbody>
-												</table>
-											</div>
-											<div class="modal-footer">
+														</thead>
+														<tbody>
+															<% if @turnosPrevios.where(user_id: t.user_id).size == 0 %>
+																<tr> <td colspan="3"> No tiene vacunas previas. </td> </tr>
+															<% else %>
+																<% @turnosPrevios.where(user_id: t.user_id).each_with_index do |tp,index| %>
+																	<tr>
+																		<td> <%= tp.enfermedad.nombre %> </td>
+																		<td> <%= tp.vacuna.laboratorio.nombre %> </td>
+																		<td> <%= tp.fecha.strftime('%d/%m/%Y') %> </td>
+																	</tr>
+																<% end %>
+															<% end %>
+														</tbody>
+													</table>
+												</div>
+												<div class="modal-footer">
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</td> 
-							<td>  <%= t.enfermedad.nombre %> </td> 
-							<td> 
-							<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelarModal<%=index.to_s%>">
-							Cancelar turno
-							</button>
+								</td> 
 
-							<!-- Modal -->
-							<div class="modal fade" id="cancelarModal<%=index.to_s%>" tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="cancelarModalLabel"> ¿Desea cancelar el turno? </h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								<td>  <%= t.enfermedad.nombre %> </td> 
+								<td>
+									<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#cancelarModal<%=index.to_s%>">
+										Cancelar turno
+									</button>
+
+									<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#detalleModal<%=index.to_s%>">
+										Vacuna aplicada
+									</button>
+
+									<!-- Modal cancelar -->
+									<div class="modal fade" id="cancelarModal<%=index.to_s%>" tabindex="-1" aria-labelledby="cancelarModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="cancelarModalLabel"> ¿Desea cancelar el turno? </h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													Esta acción solo debe realizarse en caso de que el paciente no haya podido asistir al mismo.
+													<%= form_for(t, url: edit_turno_path(id: t.id), html: { method: :get }) do |f| %>
+													<%= f.hidden_field 'aplicado', value: "false"%>
+												</div>		
+												<div class="modal-footer">
+													<%= f.submit "Cancelar turno", class: "btn btn-danger btn-sm"%>
+													<% end %>
+												</div>		
+											</div>
 										</div>
-										<div class="modal-body">
-											Esta acción solo debe realizarse en caso de que el paciente no haya podido asistir al mismo.
-											<%= form_for(t, url: edit_turno_path(id: t.id), html: { method: :get }) do |f| %>
-											<%= f.hidden_field 'aplicado', value: "false"%>
-										</div>		
-										<div class="modal-footer">
-											<%= f.submit "Cancelar turno", class: "btn btn-danger btn-sm"%>
-											<% end %>
-										</div>		
 									</div>
-								</div>
-							</div>
-			
-						<button type="button" class="btn btn-success btn-sm" style="margin-left:1rem;"data-bs-toggle="modal" data-bs-target="#detalleModal<%=index.to_s%>">
-							Vacuna aplicada
-							</button>
+						
+									
 
-							<!-- Modal -->
-							<div class="modal fade" id="detalleModal<%=index.to_s%>" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="cancelarModalLabel"> Complete la información de la vacuna aplicada: </h5>
-											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									<!-- Modal detalle -->
+									<div class="modal fade" id="detalleModal<%=index.to_s%>" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="cancelarModalLabel"> Complete la información de la vacuna aplicada: </h5>
+													<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<h5>Laboratorio: </h5>
+													<%= form_for(t, url: edit_turno_path(id: t.id), html: { method: :get }) do |f| %>
+														<%= f.hidden_field 'aplicado', value: "true"%>
+														<%= collection_select(t.vacuna, :laboratorio_id , Vacuna.where(enfermedad_id: t.enfermedad.id), :id, :nombre, {multiple: :true}, { class: 'form-control'}) %>
+														<h5>Lote: </h5>
+														<%= f.text_field :lote, input_html: { maxlength: 20 }, required: true %>
+												</div>
+												<div class="modal-footer"> 
+													<%= f.submit "Confirmar", class: "btn btn-outline-success btn-sm"%>
+													<%end%>
+												</div>
+											</div>	
 										</div>
-										<div class="modal-body">
-											<h5>Laboratorio: </h5>
-											<%= form_for(t, url: edit_turno_path(id: t.id), html: { method: :get }) do |f| %>
-											<%= f.hidden_field 'aplicado', value: "true"%>
-											<%= collection_select(t.vacuna, :laboratorio_id , Vacuna.where(enfermedad_id: t.enfermedad.id), :id, :nombre, {multiple: :true}, { class: 'form-control'}) %>
-											<h5>Lote: </h5>
-											<%= f.text_field :lote, input_html: { maxlength: 20 }, required: true %>
+									</div>
+									</div>
 										</div>
-										<div class="modal-footer"> 
-											<%= f.submit "Confirmar", class: "btn btn-outline-success btn-sm"%>
-											<%end%>
-										</div>
-									</div>	
-								</div>
-							</div>
-							</div>
-							</div>
-						</td>
-						</tr>
-				<% end %>	
-			<% end %>
-			</tbody>
-		</table>
+								</td>
+							</tr>
+						<% end %>	
+					<% end %>
+					</tbody>
+				</table>	
 	</div>
 </div>

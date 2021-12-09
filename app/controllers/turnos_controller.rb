@@ -53,7 +53,7 @@ class TurnosController < ApplicationController
     def create
         @turno = Turno.new(user_id: current_user.id, estado: "pendiente", sede_id: params[:turno][:sede_id], fecha: params[:turno][:fecha])        
         @turno.enfermedad_id = params[:turno][:enfermedad_id]
-        if (@turno.fecha.year != Date.tomorrow.year ||(@turno.fecha.month < Date.tomorrow.month && @turno.fecha.day < Date.tomorrow.day))
+        if (@turno.fecha.year < Date.tomorrow.year ||(@turno.fecha.year == Date.today.year && @turno.fecha.month < Date.tomorrow.month && @turno.fecha.day < Date.tomorrow.day))
             redirect_to new_turno_url
             flash[:alert] = "Fecha ingresada no valida. Intente nuevamente"
         else
